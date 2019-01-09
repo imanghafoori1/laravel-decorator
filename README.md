@@ -44,29 +44,22 @@ Just that. You will get cached results in your controller, then !
 composer require imanghafoori/laravel-decorator
 ```
 
-### Usage :
-
-
 ### What is a "Decorator" ?
 
 A `"Decorator"` :
 
 1 - Is a "callable"
 
-2 - that takes a "callable" (as it's only argument)
+2 - It takes a "callable" (as it's only argument)
 
-3 - and returns a "callable"
+3 - It returns a "callable"
 
 
 ### Sample decorators:
 
-1 - **static method**
+1 - **static method** 
 
-Here you can see the bare anatomy of a decorator, we just cast the result of the original call to an string.
-
-1 - It is a callable static method.
-2 - It takes in a callable.
-3 - It returns a callable.
+Here you can see the bare anatomy of a decorator, it just casts the result of the original callable to an string.
 
 ![image](https://user-images.githubusercontent.com/6961695/50929036-81059f00-1471-11e9-9734-90b226501ed9.png)
 
@@ -76,24 +69,23 @@ Here you can see the bare anatomy of a decorator, we just cast the result of the
 
 
 
-### How to make a decorated call ?
+### How to call a method with it's decorator ?
 
 ```php
 app('decorator')->call('class@method, ...
 ```
 
-### How to make a decorated Facade call ?
+## Decorate Facades :
 
-If you extend the `Imanghafoori\Decorator\DecoratableFacade` class in your facades all the method calls on your facade become decorated by default. (if there is any decorator defined for the method of course.)
+### How to make a Facade decoratable ?
+
+If you extend the `Imanghafoori\Decorator\DecoratableFacade` class (instead of the laravel base Facade) in your facade, all the method calls on your facade become "decoratable" and you will be able to decorate them.
 
 ### How to decorate Facade methods:
 
-You can do so by calling the static `decorate` method on your facade class.
+You can do so by calling the static `decorate` method on the facade class.
 
-```php
+![image](https://user-images.githubusercontent.com/6961695/50934957-8d90f400-147f-11e9-8e70-f3ee6edd4bc6.png)
 
-\MyFacade::decorate('myMethod', 'stringifyResult');
-
-```
 
 
