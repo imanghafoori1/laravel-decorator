@@ -32,7 +32,7 @@ Then you can go to `AppServiceProvider.php` (without any mad person realizing it
 ```php
 public function boot( ) {
     
-    MadRepositoryFacade::decorateMethod('getAllMads', '\App\Decorators@cache', ['myMadKey', 10]);
+    MadRepositoryFacade::decorate('getAllMads', '\App\Decorators@cache', ['myMadKey', 10]);
 }
 ```
 Just that. You will get cached results in your controller, then !
@@ -71,10 +71,10 @@ Here you can see the bare anatomy of a decorator, it just casts the result of th
 
 ```php
 
-\Decorator::decorate('class@method, [someClass::class, 'someDecoratorMethod1']);
+\Decorator::decorate('class@method, 'someClass@someDecoratorMethod');
 
 // You may set multiple decorators on a single method...
-\Decorator::decorate('class@method, [someClass::class, 'someDecoratorMethod2']);
+\Decorator::decorate('class@method, 'someClass@someDecoratorMethod2');
 ```
 
 
