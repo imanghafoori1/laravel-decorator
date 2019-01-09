@@ -39,7 +39,19 @@ class Decorator
 
     public function getDecorationsFor($callback)
     {
-        $this->decorations[$callback] ?? [];
+        return $this->decorations[$callback] ?? [];
+    }
+
+    /**
+     * Decorates a callable with a defined decorator name.
+     *
+     * @param  string $decorated
+     * @param  string $decorator
+     * @return void
+     */
+    public function decorateWith($decorated, $decorator)
+    {
+        $this->decorations[$decorated][] = $decorator;
     }
 
     /**
@@ -61,18 +73,6 @@ class Decorator
         $callback = $this->getDecoratedCall($callback, $decorations);
 
         return app()->call($callback, $parameters, $defaultMethod);
-    }
-
-    /**
-     * Decorates a callable with a defined decorator name.
-     *
-     * @param  string $decorated
-     * @param  string $decorator
-     * @return void
-     */
-    public function decorateWith($decorated, $decorator)
-    {
-        $this->decorations[$decorated][] = $decorator;
     }
 
     public function unDecorate($decorated, $decorator = null)
