@@ -100,9 +100,10 @@ If you extend the `Imanghafoori\Decorator\DecoratableFacade` class (instead of t
 
 ### How to decorate Facade methods:
 
-You can do so by calling the static `decorate` method on the facade class.
+Like this :
 
 ![image](https://user-images.githubusercontent.com/6961695/50934957-8d90f400-147f-11e9-8e70-f3ee6edd4bc6.png)
 
 
+then if you call your facade as normal you get decorated results.
 
