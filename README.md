@@ -67,6 +67,15 @@ Here you can see the bare anatomy of a decorator, it just casts the result of th
 
 2 - **Closure**
 
+### How to decorate a method on some class ?
+
+```php
+
+\Decorator::decorate('class@method, [someClass::class, 'someDecoratorMethod1']);
+
+// You may set multiple decorators on a single method...
+\Decorator::decorate('class@method, [someClass::class, 'someDecoratorMethod2']);
+```
 
 
 ### How to call a method with it's decorator ?
@@ -74,6 +83,14 @@ Here you can see the bare anatomy of a decorator, it just casts the result of th
 ```php
 app('decorator')->call('class@method, ...
 ```
+
+Or you may use the Decorator Facade:
+
+```php
+\Decorator::call('myClass@myMethod', ...
+```
+
+
 
 ## Decorate Facades :
 
