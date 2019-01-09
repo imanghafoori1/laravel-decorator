@@ -1,13 +1,15 @@
-## Laravel Decorator
+# Laravel Decorator
 
-### Easily decorate your method calls with laravel-decorator package
+## Easily decorate your method calls with laravel-decorator package
 
-#### This is a try to port python decorators into laravel framework.
+### This is a try to port python decorators into laravel framework.
 
 
 
 ### Usage Example:
+
 Imagine that you want to put a cache layer between a `MadRepository` and a `MadController`.
+
 But they are both so mad, that they do not allow you to touch a single line of their code.
 
 It smells like `open-closed principle` yeah ?! 👃 
@@ -23,6 +25,7 @@ class MadController extends Controller
     }
 }
 ```
+
 So, what now ?!
 Then you can go to `AppServiceProvider.php` (without any mad person realizing it.) 😁 
 
@@ -54,16 +57,23 @@ A `"Decorator"` :
 
 3 - and returns a "callable"
 
+
 ### Sample decorators:
 
 1 - **static method**
 
-Here we just cast the result of the original call to an string.
+Here you can see the bare anatomy of a decorator, we just cast the result of the original call to an string.
 
+1 - It is a callable static method.
+2 - It takes in a callable.
+3 - It returns a callable.
 
 ![image](https://user-images.githubusercontent.com/6961695/50929036-81059f00-1471-11e9-9734-90b226501ed9.png)
 
-**Note:** that finally we return a closure (not the strinfified result of call)
+**Note:** that finally we return a closure (not the stringified result of call)
+
+2 - **Closure**
+
 
 
 ### How to make a decorated call ?
