@@ -13,7 +13,7 @@ class DecoratableFacade extends Facade
      */
     protected static $decorations = [];
 
-    public static function decorateMethod(string $method, $decorator)
+    public static function decorate(string $method, $decorator)
     {
         static::$decorations[$method][] = $decorator;
     }
@@ -31,6 +31,7 @@ class DecoratableFacade extends Facade
             static::$decorations = [];
         }
     }
+
     /**
      * Handle dynamic, static calls to the object.
      *

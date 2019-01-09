@@ -49,7 +49,7 @@ class Decorator
      * @param  string $decorator
      * @return void
      */
-    public function decorateWith($decorated, $decorator)
+    public function decorate($decorated, $decorator)
     {
         $this->decorations[$decorated][] = $decorator;
     }

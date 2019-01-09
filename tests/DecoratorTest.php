@@ -11,7 +11,7 @@ class DecoratorTest extends TestCase
 
         $decorator->define('stringifyResult', ResultCasterDecorator::class.'@_toString');
 
-        $decorator->decorateWith(Calculator::class.'@add', 'stringifyResult');
+        $decorator->decorate(Calculator::class.'@add', 'stringifyResult');
         $result = $decorator->call(Calculator::class.'@add', [-10, -10]);
 
         $this->assertIsString($result);
@@ -30,7 +30,7 @@ class DecoratorTest extends TestCase
     {
         $decorator = new Decorator();
 
-        $decorator->decorateWith(Calculator::class.'@add', $this->getResultCasterDecorator());
+        $decorator->decorate(Calculator::class.'@add', $this->getResultCasterDecorator());
 
         $result = $decorator->call([new Calculator(), 'add'], [-10, -10]);
         $this->assertIsString($result);
@@ -38,7 +38,7 @@ class DecoratorTest extends TestCase
 
         $decorator = new Decorator();
 
-        $decorator->decorateWith(Calculator::class.'@add', [ResultCasterDecorator::class, 'staticToString']);
+        $decorator->decorate(Calculator::class.'@add', [ResultCasterDecorator::class, 'staticToString']);
 
         $result = $decorator->call([new Calculator(), 'add'], [-10, -10]);
         $this->assertIsString($result);
@@ -46,14 +46,14 @@ class DecoratorTest extends TestCase
 
         $decorator = new Decorator();
 
-        $decorator->decorateWith(Calculator::class.'@addToStr', [ResultCasterDecorator::class, 'toInt']);
+        $decorator->decorate(Calculator::class.'@addToStr', [ResultCasterDecorator::class, 'toInt']);
 
         $result = $decorator->call([new Calculator(), 'addToStr'], [-10, -10]);
         $this->assertIsInt($result);
         $this->assertEquals(-20, $result);
 
         $decorator = new Decorator();
-        $decorator->decorateWith(Calculator::class.'@addToStr', ResultCasterDecorator::class.'@toInt');
+        $decorator->decorate(Calculator::class.'@addToStr', ResultCasterDecorator::class.'@toInt');
 
         $result = $decorator->call([new Calculator(), 'addToStr'], [-10, -10]);
         $this->assertIsInt($result);
@@ -66,7 +66,7 @@ class DecoratorTest extends TestCase
 
         $decorator->define('stringifyResult', $this->getResultCasterDecorator());
 
-        $decorator->decorateWith(ICalculator::class.'@add', 'stringifyResult');
+        $decorator->decorate(ICalculator::class.'@add', 'stringifyResult');
         app()->bind(ICalculator::class, Calculator::class);
 
         $result = $decorator->call(ICalculator::class.'@add', [10, 10]);
@@ -93,8 +93,8 @@ class DecoratorTest extends TestCase
         $decorator->define('stringifyResult', $stringifyDecorator);
         $decorator->define('intifyParams', $intifyParamsDecorator);
 
-        $decorator->decorateWith(Calculator::class.'@add', 'intifyParams');
-        $decorator->decorateWith(Calculator::class.'@add', 'stringifyResult');
+        $decorator->decorate(Calculator::class.'@add', 'intifyParams');
+        $decorator->decorate(Calculator::class.'@add', 'stringifyResult');
 
         $result = $decorator->call(Calculator::class.'@add', ['-10', '-10']);
 
@@ -119,9 +119,9 @@ class DecoratorTest extends TestCase
 
         $decorator->define('stringifyResult', $this->getResultCasterDecorator());
 
-        $decorator->decorateWith(Calculator::class.'@add', 'minParam:-20');
-        $decorator->decorateWith(Calculator::class.'@add', 'maxResult:20');
-        $decorator->decorateWith(Calculator::class.'@add', 'stringifyResult');
+        $decorator->decorate(Calculator::class.'@add', 'minParam:-20');
+        $decorator->decorate(Calculator::class.'@add', 'maxResult:20');
+        $decorator->decorate(Calculator::class.'@add', 'stringifyResult');
 
         $result = $decorator->call(Calculator::class.'@add', ['x' => 2, 'y' => 2]);
 
