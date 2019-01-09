@@ -72,12 +72,9 @@ Here we just cast the result of the original call to an string.
 app('decorator')->call('class@method, ...
 ```
 
-Or if you extend the `Imanghafoori\Decorator\DecoratableFacade` class in your facades all the method calls on your facade become decorated by default. (if there is any decorator defined for the method of course.)
+### How to make a decorated Facade call ?
 
-
-### Make you Facade classes "Decoratable":
-
-You can do so by extending the `Imanghafoori\Decorator\DecoratableFacade` class.
+If you extend the `Imanghafoori\Decorator\DecoratableFacade` class in your facades all the method calls on your facade become decorated by default. (if there is any decorator defined for the method of course.)
 
 ### How to decorate Facade methods:
 
@@ -88,3 +85,5 @@ You can do so by calling the static `decorate` method on your facade class.
 \MyFacade::decorate('myMethod', 'stringifyResult');
 
 ```
+
+
