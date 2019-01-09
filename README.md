@@ -9,7 +9,9 @@
 ### Usage Example:
 Imagine that you want to put a cache layer between a `MadRepository` and a `MadController`.
 But they are both so mad, that they do not allow you to touch a single line of their code.
+
 It smells like `open-closed principle` yeah ?! 👃 
+
 **(Probably both classes are imprisoned in the `vendor` folder and are part of a laravel package, so you can not touch them)**
 
 ```php
@@ -48,7 +50,7 @@ A `"Decorator"` :
 
 1 - Is a "callable"
 
-2 - That takes a "callable" (as it's only argument)
+2 - that takes a "callable" (as it's only argument)
 
 3 - and returns a "callable"
 
@@ -62,3 +64,18 @@ Here we just cast the result of the original call to an string.
 ![image](https://user-images.githubusercontent.com/6961695/50929036-81059f00-1471-11e9-9734-90b226501ed9.png)
 
 **Note:** that finally we return a closure (not the strinfified result of call)
+
+
+### Make you Facade classes "Decoratable":
+
+You can do so by extending the `Imanghafoori\Decorator\DecoratableFacade` class.
+
+### How to decorate Facade methods:
+
+You can do so by calling the static `decorate` method on your facade class.
+
+```php
+
+\MyFacade::decorate('myMethod', 'stringifyResult');
+
+```
