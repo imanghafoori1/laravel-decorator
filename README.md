@@ -66,6 +66,15 @@ Here we just cast the result of the original call to an string.
 **Note:** that finally we return a closure (not the strinfified result of call)
 
 
+### How to make a decorated call ?
+
+```php
+app('decorator')->call('class@method, ...
+```
+
+Or if you extend the `Imanghafoori\Decorator\DecoratableFacade` class in your facades all the method calls on your facade become decorated by default. (if there is any decorator defined for the method of course.)
+
+
 ### Make you Facade classes "Decoratable":
 
 You can do so by extending the `Imanghafoori\Decorator\DecoratableFacade` class.
