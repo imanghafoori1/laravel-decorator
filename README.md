@@ -54,6 +54,20 @@ A `"Decorator"` :
 
 3 - It returns a "callable"
 
+#### Look at the below picture :
+
+1 - A public method is a "callable" in php.
+
+2 - The method has taken a "callable" as it's argument.
+
+3 - The whole thing surrounded by the black line is a closure, which is "returned" from the method.
+
+**So this method is a "Decorator".**
+
+Here we return a callable that calls the original callable and casts it's result into string.
+
+![image](https://user-images.githubusercontent.com/6961695/50966481-4855dc00-14ea-11e9-884f-5e6b762b6e35.png)
+
 
 ### Sample decorators:
 
@@ -104,9 +118,7 @@ First, you should extend the `Imanghafoori\Decorator\DecoratableFacade` class (i
 ![image](https://user-images.githubusercontent.com/6961695/50964214-e85c3700-14e3-11e9-8153-71d424daedad.png)
 
 
-### How to decorate Facade methods:
-
-Like this :
+#### Now You Can Apply Decorators:
 
 ![image](https://user-images.githubusercontent.com/6961695/50963877-1f7e1880-14e3-11e9-9c5e-90d23d1533d5.png)
 
