@@ -85,6 +85,8 @@ Here you can see the bare anatomy of a decorator, it just casts the result of th
 $result = app('decorator')->call('class@method, ...
 ```
 
+![image](https://user-images.githubusercontent.com/6961695/50965570-8c93ad00-14e7-11e9-877b-76f7f6b5ae7e.png)
+
 Or you may use the Decorator Facade:
 
 ```php
