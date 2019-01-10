@@ -57,6 +57,8 @@ A `"Decorator"` :
 
 ### Sample decorators:
 
+For good working examples please take a look at the tests folder.
+
 1 - **static method** 
 
 Here you can see the bare anatomy of a decorator, it just casts the result of the original callable to an string.
@@ -65,8 +67,6 @@ Here you can see the bare anatomy of a decorator, it just casts the result of th
 
 **Note:** that finally we return a closure (not the stringified result of call)
 
-2 - **Closure**
-
 ### How to decorate a method on some class ?
 
 ```php
@@ -74,20 +74,21 @@ Here you can see the bare anatomy of a decorator, it just casts the result of th
 \Decorator::decorate('class@method, 'someClass@someDecoratorMethod');
 
 // You may set multiple decorators on a single method...
-\Decorator::decorate('class@method, 'someClass@someDecoratorMethod2');
+
+\Decorator::decorate('class@method, 'someClass@someOtherDecorator');
 ```
 
 
 ### How to call a method with it's decorator ?
 
 ```php
-app('decorator')->call('class@method, ...
+$result = app('decorator')->call('class@method, ...
 ```
 
 Or you may use the Decorator Facade:
 
 ```php
-\Decorator::call('myClass@myMethod', ...
+$result = \Decorator::call('myClass@myMethod', ...
 ```
 
 
