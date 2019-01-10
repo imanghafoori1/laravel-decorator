@@ -56,17 +56,24 @@ A `"Decorator"` :
 
 #### Look at the below picture :
 
+Here you can see the bare anatomy of a decorator.
+
+**Why it is a decorator ? well because :**
+
 1 - A public method is a "callable" in php.
 
 2 - The method has taken a "callable" as it's argument.
 
 3 - The whole thing surrounded by the black line is a closure, which is "returned" from the method.
 
-**So this method is a "Decorator".**
 
 Here we return a callable that calls the original callable and casts it's result into string.
 
 ![image](https://user-images.githubusercontent.com/6961695/50966481-4855dc00-14ea-11e9-884f-5e6b762b6e35.png)
+
+**So this method can be used as a "Decorator".** Like this :
+
+![image](https://user-images.githubusercontent.com/6961695/50967860-a389cd80-14ee-11e9-85a5-e3cf346942a3.png)
 
 
 ### Sample decorators:
@@ -74,10 +81,6 @@ Here we return a callable that calls the original callable and casts it's result
 For good working examples please take a look at the tests folder.
 
 1 - **static method** 
-
-Here you can see the bare anatomy of a decorator, it just casts the result of the original callable to an string.
-
-![image](https://user-images.githubusercontent.com/6961695/50929036-81059f00-1471-11e9-9734-90b226501ed9.png)
 
 **Note:** that finally we return a closure (not the stringified result of call)
 
