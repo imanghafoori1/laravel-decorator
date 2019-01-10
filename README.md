@@ -97,16 +97,16 @@ $result = \Decorator::call('myClass@myMethod', ...
 
 ### How to decorate Facade methods ?
 
-First, you should extend the `Imanghafoori\Decorator\DecoratableFacade` class (instead of the laravel base Facade) in your facade.
+First, you should extend the `Imanghafoori\Decorator\DecoratableFacade` class (instead of the laravel base Facade).
 
-![image](https://user-images.githubusercontent.com/6961695/50962919-8d751080-14e0-11e9-85a8-b526d92bc08f.png)
+![image](https://user-images.githubusercontent.com/6961695/50964214-e85c3700-14e3-11e9-8153-71d424daedad.png)
 
 
 ### How to decorate Facade methods:
 
 Like this :
 
-![image](https://user-images.githubusercontent.com/6961695/50963183-44718c00-14e1-11e9-8821-f1e40fd19b04.png)
+![image](https://user-images.githubusercontent.com/6961695/50963877-1f7e1880-14e3-11e9-9c5e-90d23d1533d5.png)
 
 
 then if you call your facade as normal you get decorated results.
