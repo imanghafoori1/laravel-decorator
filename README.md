@@ -71,10 +71,19 @@ Here we return a callable that calls the original callable and casts it's result
 
 ![image](https://user-images.githubusercontent.com/6961695/50966481-4855dc00-14ea-11e9-884f-5e6b762b6e35.png)
 
-**So this method can be used as a "Decorator".** Like this :
+**So Let's use this to decorate the baz method on the Bar class :".**
 
 ![image](https://user-images.githubusercontent.com/6961695/50967860-a389cd80-14ee-11e9-85a5-e3cf346942a3.png)
 
+Alternatively you can use the `\Decorator` facade to do so :
+
+```php
+\Decorator::decorate('Bar@baz, 'Foo@toStringDecorator');
+```
+
+**It's time to enjoy having a decorated call :".**
+
+![image](https://user-images.githubusercontent.com/6961695/50968397-2bbca280-14f0-11e9-85c9-4112e14da056.png)
 
 ### Sample decorators:
 
@@ -87,8 +96,6 @@ For good working examples please take a look at the tests folder.
 ### How to decorate a method on some class ?
 
 ```php
-
-\Decorator::decorate('class@method, 'someClass@someDecoratorMethod');
 
 // You may set multiple decorators on a single method...
 
