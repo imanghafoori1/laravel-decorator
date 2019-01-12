@@ -1,10 +1,15 @@
 # Laravel Decorator
 
+
 [![Build Status](https://travis-ci.org/imanghafoori1/laravel-widgetize.svg?branch=master)](https://travis-ci.org/imanghafoori1/laravel-widgetize)
 [![Code Quality](https://scrutinizer-ci.com/g/imanghafoori1/laravel-decorator/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/imanghafoori1/laravel-decorator/?branch=master)
 [![StyleCI](https://github.styleci.io/repos/164699371/shield?branch=master)](https://github.styleci.io/repos/164699371)
 
-## A try to port "decorators" in python language to laravel framework.
+**Made with :heart: for smart clean coders**
+
+
+## A try to port "decorator" feature from python language to laravel framework.
+
 
 
 ![python-and-prey](https://user-images.githubusercontent.com/6961695/51078481-a2ad9300-16ca-11e9-8bf2-1d4ed214e030.jpg)
