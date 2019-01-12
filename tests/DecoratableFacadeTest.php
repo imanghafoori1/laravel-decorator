@@ -62,6 +62,19 @@ class DecoratableFacadeTest extends TestCase
 
         \MyFacade::forgetDecorations('getGiven');
     }
+
+    public function testFacadeClassDecoratorsCombination()
+    {
+        app()->singleton('abc', abc::class);
+        \MyFacade::decorateMethod('getGiven', ResultCasterDecorator::class.'@minimumParamZero');
+        \MyFacade::decorateClass(ResultCasterDecorator::class.'@toStringDecorator');
+
+        $this->assertEquals('1', \MyFacade::getGiven(1));
+        $this->assertEquals('0', \MyFacade::getGiven(-2));
+        $this->assertIsString(\MyFacade::getGiven(-11));
+
+        \MyFacade::forgetDecorations('getGiven');
+    }
 }
 
 class MyFacade extends \Imanghafoori\Decorator\DecoratableFacade
