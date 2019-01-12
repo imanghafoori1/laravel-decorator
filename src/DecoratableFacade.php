@@ -20,7 +20,7 @@ class DecoratableFacade extends Facade
         static::$decorations[$method][] = $decorator;
     }
 
-    public static function decorateClass($decorator)
+    public static function decorateAll($decorator)
     {
         static::$classDecorations[] = $decorator;
     }

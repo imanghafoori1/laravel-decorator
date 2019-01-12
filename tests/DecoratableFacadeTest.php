@@ -52,8 +52,8 @@ class DecoratableFacadeTest extends TestCase
     public function testFacadeClassDecorators()
     {
         app()->singleton('abc', abc::class);
-        \MyFacade::decorateClass(ResultCasterDecorator::class.'@minimumParamZero');
-        \MyFacade::decorateClass(ResultCasterDecorator::class.'@toStringDecorator');
+        \MyFacade::decorateAll(ResultCasterDecorator::class.'@minimumParamZero');
+        \MyFacade::decorateAll(ResultCasterDecorator::class.'@toStringDecorator');
 
         $this->assertEquals('1', \MyFacade::getGiven(1));
         $this->assertEquals('0', \MyFacade::getGiven(-2));
@@ -66,7 +66,7 @@ class DecoratableFacadeTest extends TestCase
     {
         app()->singleton('abc', abc::class);
         \MyFacade::decorateMethod('getGiven', ResultCasterDecorator::class.'@minimumParamZero');
-        \MyFacade::decorateClass(ResultCasterDecorator::class.'@toStringDecorator');
+        \MyFacade::decorateAll(ResultCasterDecorator::class.'@toStringDecorator');
 
         $this->assertEquals('1', \MyFacade::getGiven(1));
         $this->assertEquals('0', \MyFacade::getGiven(-2));
