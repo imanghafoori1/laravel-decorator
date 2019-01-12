@@ -149,11 +149,20 @@ First, you should extend the `Imanghafoori\Decorator\DecoratableFacade` class (i
 ![image](https://user-images.githubusercontent.com/6961695/51075625-484d0c00-16a3-11e9-9551-73b199a9c5e9.png)
 
 
-#### Now You Can Apply Decorators in your ServiceProvider's `boot() {` method:
+#### Now You Can Apply Decorators in your ServiceProvider's boot method:
 
 
+```php
+
+public function boot() {
+        
+```
 ![image](https://user-images.githubusercontent.com/6961695/51075654-e93bc700-16a3-11e9-8e5f-f917f2ae6942.png)
 
+
+```php
+}
+```
 
 then if you call your facade as normal you get decorated results.
 
@@ -161,3 +170,6 @@ then if you call your facade as normal you get decorated results.
 ![image](https://user-images.githubusercontent.com/6961695/51075751-3d937680-16a5-11e9-855b-2b8b61bdb876.png)
 
 
+### How to decorate all methods of a Facade class ?
+
+![image](https://user-images.githubusercontent.com/6961695/51077724-848e6580-16bf-11e9-8cf1-2127271e89dc.png)
