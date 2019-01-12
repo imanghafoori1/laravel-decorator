@@ -45,13 +45,13 @@ class Decorator
     /**
      * Decorates a callable with a defined decorator name.
      *
-     * @param  string $decorated
-     * @param  string $decorator
+     * @param  string $callback
+     * @param  mixed $decorator
      * @return void
      */
-    public function decorate($decorated, $decorator)
+    public function decorate($callback, $decorator)
     {
-        $this->decorations[$decorated][] = $decorator;
+        $this->decorations[$callback][] = $decorator;
     }
 
     /**
@@ -68,9 +68,9 @@ class Decorator
             $callback = $this->normalizeMethod($callback);
         }
 
-        $decorations = $this->getDecorationsFor($callback);
+        $decorators = $this->getDecorationsFor($callback);
 
-        $callback = $this->getDecoratedCall($callback, $decorations);
+        $callback = $this->getDecoratedCall($callback, $decorators);
 
         return app()->call($callback, $parameters, $defaultMethod);
     }
@@ -92,20 +92,29 @@ class Decorator
     }
 
     /**
-     * @param $callback
-     * @param $decorations
+     * @param $callable
+     * @param $decorators
      * @return mixed
      */
-    public function getDecoratedCall($callback, $decorations): callable
+    public function getDecoratedCall($callable, $decorators): callable
     {
-        foreach ($decorations as $decorator) {
+        foreach ($decorators as $decorator) {
             if (is_string($decorator) and ! Str::contains($decorator, '@')) {
                 $decorator = $this->globalDecorators[$decorator];
             }
 
-            $callback = app()->call($decorator, [$callback]);
+            $callable = app()->call($decorator, [$callable]);
         }
 
-        return $callback;
+        return $callable;
+    }
+
+    /**
+     * @param $callable
+     * @param $decorators
+     */
+    public function callOnlyWith($callable, $decorators)
+    {
+        $this->getDecoratedCall($callable, $decorators);
     }
 }

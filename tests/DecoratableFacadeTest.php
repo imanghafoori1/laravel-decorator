@@ -30,7 +30,7 @@ class DecoratableFacadeTest extends TestCase
     public function testDecoratableFacade2()
     {
         app()->singleton('abc', abc::class);
-        app(Decorator::class)->define('stringifyResult', [ResultCasterDecorator::class, 'staticToString']);
+        app(Decorator::class)->define('stringifyResult', [ResultCasterDecorator::class, 'toStringStaticDecorator']);
 
         \MyFacade::forgetDecorations('getGiven');
         \MyFacade::decorate('getGiven', 'stringifyResult');
@@ -44,7 +44,7 @@ class DecoratableFacadeTest extends TestCase
     {
         app()->singleton('abc', abc::class);
         \MyFacade::forgetDecorations('getGiven');
-        \MyFacade::decorate('getGiven', [ResultCasterDecorator::class, 'staticToString']);
+        \MyFacade::decorate('getGiven', ResultCasterDecorator::class.'@toStringDecorator');
 
         $this->assertIsString(\MyFacade::getGiven(1));
         $this->assertEquals('2', \MyFacade::getGiven(2));

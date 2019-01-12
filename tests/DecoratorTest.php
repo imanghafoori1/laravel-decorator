@@ -38,7 +38,7 @@ class DecoratorTest extends TestCase
 
         $decorator = new Decorator();
 
-        $decorator->decorate(Calculator::class.'@add', [ResultCasterDecorator::class, 'staticToString']);
+        $decorator->decorate(Calculator::class.'@add', ResultCasterDecorator::class.'@toStringDecorator');
 
         $result = $decorator->call([new Calculator(), 'add'], [-10, -10]);
         $this->assertIsString($result);
@@ -106,12 +106,12 @@ class DecoratorTest extends TestCase
     {
         $decorator = new Decorator();
 
-        $decorator->define('minParam:-20', function ($decorated) {
-            return function ($x, $y) use ($decorated) {
+        $decorator->define('minParam:-20', function ($callback) {
+            return function ($x, $y) use ($callback) {
                 $x = ($x < -20) ? -20 : $x;
                 $y = ($y < -20) ? -20 : $y;
 
-                return app()->call($decorated, [$x, $y]);
+                return app()->call($callback, [$x, $y]);
             };
         });
 
@@ -146,9 +146,9 @@ class DecoratorTest extends TestCase
      */
     public function getResultCasterDecorator()
     {
-        return function ($decorated) {
-            return function (...$params) use ($decorated) {
-                return (string) app()->call($decorated, $params);
+        return function ($callable) {
+            return function (...$params) use ($callable) {
+                return (string) app()->call($callable, $params);
             };
         };
     }
@@ -159,9 +159,9 @@ class DecoratorTest extends TestCase
      */
     private function maxResult(int $max): \Closure
     {
-        return function ($decorated) use ($max) {
-            return function (...$params) use ($decorated, $max) {
-                $result = app()->call($decorated, $params);
+        return function ($callable) use ($max) {
+            return function (...$params) use ($callable, $max) {
+                $result = app()->call($callable, $params);
 
                 return ($result > $max) ? $max : $result;
             };
@@ -189,24 +189,31 @@ class Calculator implements ICalculator
 
 class ResultCasterDecorator
 {
-    public static function staticToString($decorated)
+    public function toStringDecorator($callable)
     {
-        return function (...$params) use ($decorated) {
-            return (string) app()->call($decorated, $params);
+        return function (...$params) use ($callable) {
+            return (string) app()->call($callable, $params);
         };
     }
 
-    public static function toInt($decorated)
+    public static function toStringStaticDecorator($callable)
     {
-        return function (...$params) use ($decorated) {
-            return (int) app()->call($decorated, $params);
+        return function (...$params) use ($callable) {
+            return (string) app()->call($callable, $params);
         };
     }
 
-    public function _toString($decorated)
+    public static function toInt($callable)
     {
-        return function (...$params) use ($decorated) {
-            return (string) app()->call($decorated, $params);
+        return function (...$params) use ($callable) {
+            return (int) app()->call($callable, $params);
+        };
+    }
+
+    public function _toString($callable)
+    {
+        return function (...$params) use ($callable) {
+            return (string) app()->call($callable, $params);
         };
     }
 }
