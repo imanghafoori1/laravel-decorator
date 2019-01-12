@@ -6,7 +6,20 @@
 
 ## A try to port "decorators" in python language to laravel framework.
 
-### Easily decorate your method calls with laravel-decorator package
+
+![python-and-prey](https://user-images.githubusercontent.com/6961695/51078481-a2ad9300-16ca-11e9-8bf2-1d4ed214e030.jpg)
+
+#### Why this header is chosen for a laravel package ?! You will shortly see why...
+
+### What is a "Decorator" ?
+
+A decorator wraps around the original function, effectively take over it's behaviour and returns result on it's behalf..
+
+Like a python swallowing a deer and wraps around it...
+
+Decorators take in a callable, wrap around them and return a newly born callable.
+
+
 
 ### Cache Like a Pro:
 
@@ -36,17 +49,22 @@ So, what now ?!
 With the help of laravel-decorator, you can go to `AppServiceProvider.php` (without any mad person realizing it.) 😁 
 
 ```php
+
+use Imanghafoori\Decorator\Decorators\CacheResults;
+
 public function boot( ) {
     
-    MadRepositoryFacade::decorateClass('getAllMads', CacheResults::cache('myKey', 10));
+    MadRepositoryFacade::decorateAll('getAllMads', CacheResults::cache('myKey', 10));
 }
+
 ```
 Just that.
 
-You will get cached results from your Facade calls, in your app !
+You will get cached results from your Facade calls, in your entire app without changing a single line of code !!
 
 
-### Warning :
+
+### :warning: Warning :
 
 With great power, comes great responsibilities.
 
@@ -59,21 +77,21 @@ Since the users of the function should be ready for type of value they get back 
 But if you return only `int` and your decorator causes the `null` value to be filtered out. that's ok.
 
 
-### Installation :
+### :truck: Installation :
 
 ```
 composer require imanghafoori/laravel-decorator
 ```
 
-### What is a "Decorator" ?
 
-A `"Decorator"` :
 
-1 - Is a "callable"
+Technically, A `"Decorator"` :
 
-2 - It takes a "callable" (as it's only argument)
+1 - Is a "callable" (python is an animal)
 
-3 - It returns a "callable"
+2 - It takes a "callable" as it's only argument (a python swallow an other animal animal)
+
+3 - It returns a new "callable" (and turns into a bloated animal surrounding it.)
 
 #### Look at the below picture :
 
