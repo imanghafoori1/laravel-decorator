@@ -26,6 +26,14 @@ Like a python snake swallowing a deer and wraps around it's body ...
 
 Decorators take in a callable, wrap around them and return a newly born callable.
 
+Technically, A `"Decorator"` :
+
+1 - Is a "callable" (python is an animal)
+
+2 - It takes a "callable" as it's only argument (a python swallow an other animal animal)
+
+3 - It returns a new "callable" (and turns into a bloated animal surrounding it.)
+
 ### :truck: Installation :
 
 ```
@@ -79,29 +87,8 @@ You will get cached results from your Facade calls, in your entire app without c
 
 
 
-### :warning: Warning :
 
-With great power, comes great responsibilities.
-
-Remember not to violate the `Liskoves Substitution Principle` when you decorate something.
-
-For example a function call which returns `int|null` should not unexpectedly return a `string` after being decorated.
-
-Since the users of the function should be ready for type of value they get back from the function call.
-
-But if you return only `int` and your decorator causes the `null` value to be filtered out. that's ok.
-
-
-
-Technically, A `"Decorator"` :
-
-1 - Is a "callable" (python is an animal)
-
-2 - It takes a "callable" as it's only argument (a python swallow an other animal animal)
-
-3 - It returns a new "callable" (and turns into a bloated animal surrounding it.)
-
-#### What is a callable then ?
+#### What is a callable ?
 
 Long story short, A callable in laravel is anything that can be called with `\App::call();`
 
@@ -178,3 +165,16 @@ then if you call your facade as normal you get decorated results.
 ![image](https://user-images.githubusercontent.com/6961695/51075751-3d937680-16a5-11e9-855b-2b8b61bdb876.png)
 
 
+### :warning: Warning :
+
+With great power, comes great responsibilities.
+
+Remember not to violate the `Liskoves Substitution Principle` when you decorate something.
+
+For example a method call which returns `int|null` should not unexpectedly return a `string` after being decorated.
+
+`$result = app('decorate')->call(...`
+
+Since the users of the method should be ready for type of value they get back.
+
+But if you return only `int` and your decorator causes the `null` value to be filtered out. that's ok.
