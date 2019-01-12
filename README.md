@@ -157,5 +157,7 @@ First, you should extend the `Imanghafoori\Decorator\DecoratableFacade` class (i
 
 then if you call your facade as normal you get decorated results.
 
-![image](https://user-images.githubusercontent.com/6961695/50963709-b0082900-14e2-11e9-84c8-c1665693d390.png)
+
+![image](https://user-images.githubusercontent.com/6961695/51075751-3d937680-16a5-11e9-855b-2b8b61bdb876.png)
+
 
