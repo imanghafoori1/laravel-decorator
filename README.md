@@ -149,7 +149,7 @@ First, you should extend the `Imanghafoori\Decorator\DecoratableFacade` class (i
 ![image](https://user-images.githubusercontent.com/6961695/51075625-484d0c00-16a3-11e9-9551-73b199a9c5e9.png)
 
 
-#### Now You Can Apply Decorators:
+#### Now You Can Apply Decorators in your ServiceProvider's `boot() {` method:
 
 
 ![image](https://user-images.githubusercontent.com/6961695/51075654-e93bc700-16a3-11e9-8e5f-f917f2ae6942.png)
