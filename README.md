@@ -101,9 +101,15 @@ Technically, A `"Decorator"` :
 
 3 - It returns a new "callable" (and turns into a bloated animal surrounding it.)
 
+#### What is a callable then ?
+
+Long story short, A callable in laravel is anything that can be called with `\App::call();`
+
 #### Look at the below picture :
 
 Here you can see the bare anatomy of a decorator.
+
+![image](https://user-images.githubusercontent.com/6961695/50966481-4855dc00-14ea-11e9-884f-5e6b762b6e35.png)
 
 **Why it is a decorator ? well because :**
 
@@ -116,9 +122,8 @@ Here you can see the bare anatomy of a decorator.
 
 Here we return a callable that calls the original callable and casts it's result into string.
 
-![image](https://user-images.githubusercontent.com/6961695/50966481-4855dc00-14ea-11e9-884f-5e6b762b6e35.png)
 
-**So Let's use this to decorate the baz method on the Bar class :".**
+**So Let's apply this to decorate on the baz method on the Bar class :".**
 
 ![image](https://user-images.githubusercontent.com/6961695/50967860-a389cd80-14ee-11e9-85a5-e3cf346942a3.png)
 
@@ -130,21 +135,21 @@ Alternatively you can use the `\Decorator` facade to do so
 
 ![image](https://user-images.githubusercontent.com/6961695/50968397-2bbca280-14f0-11e9-85c9-4112e14da056.png)
 
+**Note:** that finally a closure is returned (not the actual value)
+
 ### Sample decorators:
 
 For good working examples please take a look at the tests folder.
 
-1 - **static method** 
 
-**Note:** that finally we return a closure (not the stringified result of call)
-
-### How to decorate a method on some class ?
+### How to apply a decorator on a method ?
 
 ```php
 
 // You may set multiple decorators on a single method...
 
 \Decorator::decorate('class@method, 'someClass@someOtherDecorator');
+
 ```
 
 
