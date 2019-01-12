@@ -22,7 +22,7 @@
 
 A decorator wraps around the original function, effectively take over it's behaviour and returns result on it's behalf..
 
-Like a python swallowing a deer and wraps around it...
+Like a python snake swallowing a deer and wraps around it's body ...
 
 Decorators take in a callable, wrap around them and return a newly born callable.
 
@@ -33,7 +33,7 @@ composer require imanghafoori/laravel-decorator
 ```
 
 
-### Cache Like a Pro:
+### A Use Case: Cache Like a Pro:
 
 Imagine that you want to put a cache layer between a `MadRepository` and a `MadController`.
 
