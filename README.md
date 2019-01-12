@@ -1,12 +1,10 @@
 # Laravel Decorator
 
-## Easily decorate your method calls with laravel-decorator package
+## This is a try to port decorators in python language to laravel framework.
 
-### This is a try to port python decorators into laravel framework.
+### Easily decorate your method calls with laravel-decorator package
 
-
-
-### Usage Example:
+### Cache Like a Pro:
 
 Imagine that you want to put a cache layer between a `MadRepository` and a `MadController`.
 
@@ -14,12 +12,15 @@ But they are both so mad, that they do not allow you to touch a single line of t
 
 It smells like `open-closed principle` yeah ?! 👃 
 
-**(Probably both classes are imprisoned in the `vendor` folder and are part of a laravel package, so you can not touch them)**
+**(Probably both `MadRepository` and `MadController` are imprisoned in the `vendor` folder and are part of a laravel package, so you can not touch them)**
 
 ```php
 class MadController extends Controller
 {
     public function index () {
+    
+        // we don't want to put any cache logic here...
+        
         $mads = MadRepositoryFacade::getAllMads();
         ...
     }
@@ -27,15 +28,31 @@ class MadController extends Controller
 ```
 
 So, what now ?!
-Then you can go to `AppServiceProvider.php` (without any mad person realizing it.) 😁 
+
+With the help of laravel-decorator, you can go to `AppServiceProvider.php` (without any mad person realizing it.) 😁 
 
 ```php
 public function boot( ) {
     
-    MadRepositoryFacade::decorate('getAllMads', '\App\Decorators@cache', ['myMadKey', 10]);
+    MadRepositoryFacade::decorateClass('getAllMads', CacheResults::cache('myKey', 10));
 }
 ```
-Just that. You will get cached results in your controller, then !
+Just that.
+
+You will get cached results from your Facade calls, in your app !
+
+
+### Warning :
+
+With great power, comes great responsibilities.
+
+Remember not to violate the `Liskoves Substitution Principle` when you decorate something.
+
+For example a function call which returns `int|null` should not unexpectedly return a `string` after being decorated.
+
+Since the users of the function should be ready for type of value they get back from the function call.
+
+But if you return only `int` and your decorator causes the `null` value to be filtered out. that's ok.
 
 
 ### Installation :
