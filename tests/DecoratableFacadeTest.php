@@ -71,6 +71,7 @@ class DecoratableFacadeTest extends TestCase
 
         $this->assertEquals('1', \MyFacade::getGiven(1));
         $this->assertEquals('0', \MyFacade::getGiven(-2));
+        $this->assertIsString(\MyFacade::getGiven(-2));
         $this->assertIsString(\MyFacade::getGiven(-11));
 
         \MyFacade::forgetDecorations('getGiven');
