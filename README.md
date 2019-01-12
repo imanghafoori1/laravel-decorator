@@ -4,6 +4,8 @@
 [![Build Status](https://travis-ci.org/imanghafoori1/laravel-widgetize.svg?branch=master)](https://travis-ci.org/imanghafoori1/laravel-widgetize)
 [![Code Quality](https://scrutinizer-ci.com/g/imanghafoori1/laravel-decorator/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/imanghafoori1/laravel-decorator/?branch=master)
 [![StyleCI](https://github.styleci.io/repos/164699371/shield?branch=master)](https://github.styleci.io/repos/164699371)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=round-square)](LICENSE.md)
+[![Latest Stable Version](https://poser.pugx.org/imanghafoori/laravel-decorator/v/stable)](https://packagist.org/packages/imanghafoori/laravel-decorator)
 
 **Made with :heart: for smart clean coders**
 
@@ -24,6 +26,11 @@ Like a python swallowing a deer and wraps around it...
 
 Decorators take in a callable, wrap around them and return a newly born callable.
 
+### :truck: Installation :
+
+```
+composer require imanghafoori/laravel-decorator
+```
 
 
 ### Cache Like a Pro:
@@ -51,15 +58,18 @@ class MadController extends Controller
 
 So, what now ?!
 
-With the help of laravel-decorator, you can go to `AppServiceProvider.php` (without any mad person realizing it.) 😁 
+With the help of laravel-decorator built in cache decorator, you can go to `AppServiceProvider.php` (without any mad person realizing it.) 😁 
 
 ```php
 
 use Imanghafoori\Decorator\Decorators\CacheResults;
 
-public function boot( ) {
-    
-    MadRepositoryFacade::decorateAll('getAllMads', CacheResults::cache('myKey', 10));
+class AppServiceProvider extends ServiceProvider {
+
+    public function boot( ) {
+
+        MadRepositoryFacade::decorateAll('getAllMads', CacheResults::cache('myKey', 10));
+    }
 }
 
 ```
@@ -80,13 +90,6 @@ For example a function call which returns `int|null` should not unexpectedly ret
 Since the users of the function should be ready for type of value they get back from the function call.
 
 But if you return only `int` and your decorator causes the `null` value to be filtered out. that's ok.
-
-
-### :truck: Installation :
-
-```
-composer require imanghafoori/laravel-decorator
-```
 
 
 
@@ -152,7 +155,7 @@ For good working examples please take a look at the tests folder.
 
 ## Decorate Facades :
 
-### How to decorate Facade methods ?
+### Decorating Facade Methods
 
 First, you should extend the `Imanghafoori\Decorator\DecoratableFacade` class (instead of the laravel base Facade).
 
