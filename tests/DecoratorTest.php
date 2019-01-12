@@ -196,6 +196,20 @@ class ResultCasterDecorator
         };
     }
 
+    public function minimumParamZero($callable)
+    {
+        return function (...$params) use ($callable) {
+
+            foreach ($params as $i => $param) {
+                if ($param < 0) {
+                    $params[$i] = 0;
+                }
+            }
+
+            return app()->call($callable, $params);
+        };
+    }
+
     public static function toStringStaticDecorator($callable)
     {
         return function (...$params) use ($callable) {

@@ -13,9 +13,16 @@ class DecoratableFacade extends Facade
      */
     protected static $decorations = [];
 
-    public static function decorate(string $method, $decorator)
+    protected static $classDecorations = [];
+
+    public static function decorateMethod(string $method, $decorator)
     {
         static::$decorations[$method][] = $decorator;
+    }
+
+    public static function decorateClass($decorator)
+    {
+        static::$classDecorations[] = $decorator;
     }
 
     public static function getDecorations($method)
@@ -43,12 +50,13 @@ class DecoratableFacade extends Facade
      */
     public static function __callStatic($method, $args)
     {
-        $callback = function ($method, $args) {
+        $callback = function (...$args) use ($method) {
             return parent::__callStatic($method, $args);
         };
 
-        $callback = app(Decorator::class)->getDecoratedCall($callback, self::getDecorations($method));
+        $decorators = self::getDecorations($method) + static::$classDecorations;
+        $callback = app(Decorator::class)->getDecoratedCall($callback, $decorators);
 
-        return $callback($method, $args);
+        return $callback(...$args);
     }
 }

@@ -8,7 +8,7 @@ class DecoratableFacadeTest extends TestCase
     {
         app()->singleton('abc', abc::class);
         \MyFacade::forgetDecorations('getGiven');
-        \MyFacade::decorate('getGiven', function ($f) {
+        \MyFacade::decorateMethod('getGiven', function ($f) {
             return function () {
                 return null;
             };
@@ -17,7 +17,7 @@ class DecoratableFacadeTest extends TestCase
         $this->assertNull(\MyFacade::getGiven(1));
         $this->assertNull(\MyFacade::getGiven(2));
 
-        \MyFacade::decorate('getGiven', function ($f) {
+        \MyFacade::decorateMethod('getGiven', function ($f) {
             return function () {
                 return 'hello;';
             };
@@ -33,7 +33,7 @@ class DecoratableFacadeTest extends TestCase
         app(Decorator::class)->define('stringifyResult', [ResultCasterDecorator::class, 'toStringStaticDecorator']);
 
         \MyFacade::forgetDecorations('getGiven');
-        \MyFacade::decorate('getGiven', 'stringifyResult');
+        \MyFacade::decorateMethod('getGiven', 'stringifyResult');
 
         $this->assertIsString(\MyFacade::getGiven(1));
         $this->assertEquals('2', \MyFacade::getGiven(2));
@@ -43,11 +43,24 @@ class DecoratableFacadeTest extends TestCase
     public function testStaticMethodsAsDecoratorsOnFacades()
     {
         app()->singleton('abc', abc::class);
-        \MyFacade::forgetDecorations('getGiven');
-        \MyFacade::decorate('getGiven', ResultCasterDecorator::class.'@toStringDecorator');
+        \MyFacade::decorateMethod('getGiven', ResultCasterDecorator::class.'@toStringDecorator');
 
         $this->assertIsString(\MyFacade::getGiven(1));
         $this->assertEquals('2', \MyFacade::getGiven(2));
+        \MyFacade::forgetDecorations('getGiven');
+    }
+
+    public function testFacadeClassDecorators()
+    {
+        app()->singleton('abc', abc::class);
+        \MyFacade::decorateClass(ResultCasterDecorator::class.'@minimumParamZero');
+        \MyFacade::decorateClass(ResultCasterDecorator::class.'@toStringDecorator');
+
+        $this->assertEquals('1', \MyFacade::getGiven(1));
+        $this->assertEquals('0', \MyFacade::getGiven(-2));
+        $this->assertIsString(\MyFacade::getGiven(-11));
+
+        \MyFacade::forgetDecorations('getGiven');
     }
 }
 
