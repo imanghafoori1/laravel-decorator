@@ -142,18 +142,7 @@ For good working examples please take a look at the tests folder.
 
 ### How to call a method with it's decorator ?
 
-```php
-$result = app('decorator')->call('class@method, ...
-```
-
 ![image](https://user-images.githubusercontent.com/6961695/51078628-970f9b80-16cd-11e9-8b23-267b2d1564e7.png)
-
-Or you may use the Decorator Facade:
-
-```php
-$result = \Decorator::call('myClass@myMethod', ...
-```
-
 
 
 ## Decorate Facades :
