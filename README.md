@@ -4,7 +4,7 @@
 
 [![Code Quality](https://scrutinizer-ci.com/g/imanghafoori1/laravel-decorator/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/imanghafoori1/laravel-decorator/?branch=master)
 
-[![StyleCI](https://github.styleci.io/repos/164699371/shield?branch=master)]
+[![StyleCI](https://github.styleci.io/repos/164699371/shield?branch=master)](https://github.styleci.io/repos/164699371)
 
 ## This is a try to port decorators in python language to laravel framework.
 
