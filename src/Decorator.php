@@ -23,8 +23,9 @@ class Decorator
     /**
      * Defines a new decorator with name.
      *
-     * @param  string $name
-     * @param  callable $callback
+     * @param string   $name
+     * @param callable $callback
+     *
      * @return void
      */
     public function define($name, $callback)
@@ -45,8 +46,9 @@ class Decorator
     /**
      * Decorates a callable with a defined decorator name.
      *
-     * @param  string $callback
-     * @param  mixed $decorator
+     * @param string $callback
+     * @param mixed  $decorator
+     *
      * @return void
      */
     public function decorate($callback, $decorator)
@@ -57,9 +59,10 @@ class Decorator
     /**
      * Calls a class@method with it's specified decorators.
      *
-     * @param  string $callback
-     * @param  array $parameters
-     * @param  string|null $defaultMethod
+     * @param string      $callback
+     * @param array       $parameters
+     * @param string|null $defaultMethod
+     *
      * @return mixed
      */
     public function call($callback, array $parameters = [], $defaultMethod = null)
@@ -94,12 +97,13 @@ class Decorator
     /**
      * @param $callable
      * @param $decorators
+     *
      * @return mixed
      */
     public function getDecoratedCall($callable, $decorators): callable
     {
         foreach ($decorators as $decorator) {
-            if (is_string($decorator) and ! Str::contains($decorator, '@')) {
+            if (is_string($decorator) and !Str::contains($decorator, '@')) {
                 $decorator = $this->globalDecorators[$decorator];
             }
 

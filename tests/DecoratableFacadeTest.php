@@ -10,7 +10,6 @@ class DecoratableFacadeTest extends TestCase
         \MyFacade::forgetDecorations('getGiven');
         \MyFacade::decorateMethod('getGiven', function ($f) {
             return function () {
-                return null;
             };
         });
 
@@ -82,7 +81,7 @@ class MyFacade extends \Imanghafoori\Decorator\DecoratableFacade
 {
     protected static function getFacadeAccessor()
     {
-       return 'abc';
+        return 'abc';
     }
 }
 

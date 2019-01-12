@@ -18,6 +18,7 @@ class CacheResults
      * @param $key
      * @param $minutes
      * @param $remember
+     *
      * @return \Closure
      */
     private static function getDecoratorFactory($key, $minutes, $remember): \Closure

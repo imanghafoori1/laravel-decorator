@@ -155,6 +155,7 @@ class DecoratorTest extends TestCase
 
     /**
      * @param int $max
+     *
      * @return \Closure
      */
     private function maxResult(int $max): \Closure
@@ -199,7 +200,6 @@ class ResultCasterDecorator
     public function minimumParamZero($callable)
     {
         return function (...$params) use ($callable) {
-
             foreach ($params as $i => $param) {
                 if ($param < 0) {
                     $params[$i] = 0;
