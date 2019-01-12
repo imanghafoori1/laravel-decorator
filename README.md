@@ -1,5 +1,11 @@
 # Laravel Decorator
 
+[![Build Status](https://travis-ci.org/imanghafoori1/laravel-widgetize.svg?branch=master)](https://travis-ci.org/imanghafoori1/laravel-widgetize)
+
+[![Code Quality](https://scrutinizer-ci.com/g/imanghafoori1/laravel-decorator/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/imanghafoori1/laravel-decorator/?branch=master)
+
+[![StyleCI](https://github.styleci.io/repos/164699371/shield?branch=master)]
+
 ## This is a try to port decorators in python language to laravel framework.
 
 ### Easily decorate your method calls with laravel-decorator package
