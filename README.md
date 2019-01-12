@@ -114,11 +114,9 @@ Here we return a callable that calls the original callable and casts it's result
 
 ![image](https://user-images.githubusercontent.com/6961695/50967860-a389cd80-14ee-11e9-85a5-e3cf346942a3.png)
 
-Alternatively you can use the `\Decorator` facade to do so :
+Alternatively you can use the `\Decorator` facade to do so
 
-```php
-\Decorator::decorate('Bar@baz, 'Foo@toStringDecorator');
-```
+
 
 **It's time to enjoy having a decorated call :".**
 
@@ -148,7 +146,7 @@ For good working examples please take a look at the tests folder.
 $result = app('decorator')->call('class@method, ...
 ```
 
-![image](https://user-images.githubusercontent.com/6961695/50965570-8c93ad00-14e7-11e9-877b-76f7f6b5ae7e.png)
+![image](https://user-images.githubusercontent.com/6961695/51078628-970f9b80-16cd-11e9-8b23-267b2d1564e7.png)
 
 Or you may use the Decorator Facade:
 
