@@ -15,14 +15,18 @@ class DecoratableFacade extends Facade
 
     protected static $classDecorations = [];
 
-    public static function decorateMethod(string $method, $decorator)
+    public static function decorateMethod($method, $decorator)
     {
-        static::$decorations[$method][] = $decorator;
+        foreach ((array) $method as $m) {
+            static::$decorations[$m][] = $decorator;
+        }
     }
 
     public static function decorateAll($decorator)
     {
-        static::$classDecorations[] = $decorator;
+        foreach ((array) $decorator as $d) {
+            static::$classDecorations[] = $d;
+        }
     }
 
     public static function getDecorations($method)
