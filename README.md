@@ -146,12 +146,13 @@ $result = \Decorator::call('myClass@myMethod', ...
 
 First, you should extend the `Imanghafoori\Decorator\DecoratableFacade` class (instead of the laravel base Facade).
 
-![image](https://user-images.githubusercontent.com/6961695/50964214-e85c3700-14e3-11e9-8153-71d424daedad.png)
+![image](https://user-images.githubusercontent.com/6961695/51075625-484d0c00-16a3-11e9-9551-73b199a9c5e9.png)
 
 
 #### Now You Can Apply Decorators:
 
-![image](https://user-images.githubusercontent.com/6961695/50963877-1f7e1880-14e3-11e9-9c5e-90d23d1533d5.png)
+
+![image](https://user-images.githubusercontent.com/6961695/51075654-e93bc700-16a3-11e9-8e5f-f917f2ae6942.png)
 
 
 then if you call your facade as normal you get decorated results.
