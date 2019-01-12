@@ -42,11 +42,12 @@ class DecoratableFacade extends Facade
     /**
      * Handle dynamic, static calls to the object.
      *
-     * @param  string  $method
-     * @param  array   $args
-     * @return mixed
+     * @param string $method
+     * @param array  $args
      *
      * @throws \RuntimeException
+     *
+     * @return mixed
      */
     public static function __callStatic($method, $args)
     {
