@@ -60,7 +60,7 @@ class DecoratableFacade extends Facade
         };
 
         $decorators = self::getDecorations($method) + static::$classDecorations;
-        $callback = app(Decorator::class)->getDecoratedCall($callback, $decorators);
+        $callback = app(Decorator::class)->decorateWith($callback, $decorators);
 
         return $callback(...$args);
     }

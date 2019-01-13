@@ -78,7 +78,7 @@ class Decorator
 
         $decorators = $this->getDecorationsFor($callback);
 
-        $callback = $this->getDecoratedCall($callback, $decorators);
+        $callback = $this->decorateWith($callback, $decorators);
 
         return app()->call($callback, $parameters, $defaultMethod);
     }
@@ -105,7 +105,7 @@ class Decorator
      *
      * @return mixed
      */
-    public function getDecoratedCall($callable, array $decorators)
+    public function decorateWith($callable, array $decorators)
     {
         foreach ($decorators as $decorator) {
             if (is_string($decorator) and !Str::contains($decorator, '@')) {
@@ -127,22 +127,8 @@ class Decorator
      */
     public function callOnlyWith($callable, $decorators, $params)
     {
-        $callable = $this->getDecoratedCall($callable, $decorators);
+        $callable = $this->decorateWith($callable, $decorators);
 
         return \App::make($callable, $params);
-    }
-
-    /**
-     * @return \Closure
-     */
-    private function nullDecorator(): \Closure
-    {
-        $nullDecorator = function ($callable) {
-            return function (...$param) use ($callable) {
-                return app()->call($callable, $param);
-            };
-        };
-
-        return $nullDecorator;
     }
 }
