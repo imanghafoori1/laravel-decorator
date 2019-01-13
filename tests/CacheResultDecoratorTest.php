@@ -19,4 +19,19 @@ class CacheResultDecoratorTest extends TestCase
 
         \MyFacade::forgetDecorations('getGiven');
     }
+
+    public function testPermanentCacheResultDecorator()
+    {
+        app()->singleton('abc', abc::class);
+        \MyFacade::forgetDecorations('getGiven');
+        \MyFacade::decorateMethod('getGiven', CacheResults::foreverCache('hello'));
+
+        App::shouldReceive('call')->once()->andReturn('We may never know?!');
+
+        $this->assertEquals('We may never know?!', \MyFacade::getGiven(1));
+        $this->assertEquals('We may never know?!', \MyFacade::getGiven(1));
+        $this->assertEquals('We may never know?!', \MyFacade::getGiven(1));
+
+        \MyFacade::forgetDecorations('getGiven');
+    }
 }

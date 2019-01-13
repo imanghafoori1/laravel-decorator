@@ -6,12 +6,12 @@ class CacheResults
 {
     public static function cache($key, $minutes = 1)
     {
-        return self::getDecoratorFactory($key, $minutes, 'remember');
+        return self::getDecoratorFactory($key, 'remember', $minutes);
     }
 
-    public static function permanentCache($key, $minutes = 1)
+    public static function foreverCache($key)
     {
-        return self::getDecoratorFactory($key, $minutes, 'rememberForever');
+        return self::getDecoratorFactory($key, 'rememberForever');
     }
 
     /**
@@ -21,13 +21,14 @@ class CacheResults
      *
      * @return \Closure
      */
-    private static function getDecoratorFactory($key, $minutes, $remember): \Closure
+    private static function getDecoratorFactory($key, $remember, $minutes = null): \Closure
     {
         return function ($callable) use ($key, $minutes, $remember) {
             return function (...$params) use ($callable, $key, $minutes, $remember) {
-                return cache()->$remember($key, $minutes, function () use ($callable, $params) {
+                $cb = function () use ($callable, $params) {
                     return \App::call($callable, $params);
-                });
+                };
+                return cache()->$remember(...array_filter([$key, $minutes, $cb]));
             };
         };
     }
