@@ -34,8 +34,8 @@ class Decorator
     }
 
     /**
-     *
      * @param $name
+     *
      * @return mixed|null
      */
     public function getGlobalDecorator($name)
@@ -88,7 +88,7 @@ class Decorator
         if (is_null($decorator)) {
             unset($this->decorations[$decorated]);
         } else {
-            $this->decorations[$decorated] = array_diff($this->decorations[$decorated], [$decorator] );
+            $this->decorations[$decorated] = array_diff($this->decorations[$decorated], [$decorator]);
         }
     }
 
@@ -122,11 +122,13 @@ class Decorator
      * @param  $callable
      * @param  $decorators
      * @param  $params
+     *
      * @return mixed
      */
     public function callOnlyWith($callable, $decorators, $params)
     {
         $callable = $this->getDecoratedCall($callable, $decorators);
+
         return \App::make($callable, $params);
     }
 
