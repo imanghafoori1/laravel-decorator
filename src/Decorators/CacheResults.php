@@ -30,7 +30,7 @@ class CacheResults
                 };
 
                 return cache()->$remember(...array_filter([$key, $minutes, $cb], function ($el) {
-                    return ! is_null($el);
+                    return !is_null($el);
                 }));
             };
         };
