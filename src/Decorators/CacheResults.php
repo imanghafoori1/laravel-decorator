@@ -29,7 +29,9 @@ class CacheResults
                     return \App::call($callable, $params);
                 };
 
-                return cache()->$remember(...array_filter([$key, $minutes, $cb]));
+                return cache()->$remember(...array_filter([$key, $minutes, $cb], function ($el) {
+                    return ! is_null($el);
+                }));
             };
         };
     }
