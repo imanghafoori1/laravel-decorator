@@ -38,7 +38,7 @@ class DecoratableFacade extends Facade
     {
         if ($method) {
             unset(static::$decorations[$method]);
-        } elseif (is_null()) {
+        } elseif (is_null($method)) {
             static::$decorations = [];
         }
     }

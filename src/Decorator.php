@@ -45,7 +45,7 @@ class Decorator
 
     public function getDecorationsFor($callback)
     {
-        return $this->decorations[$callback] ?? null;
+        return $this->decorations[$callback] ?? [];
     }
 
     /**
@@ -76,7 +76,7 @@ class Decorator
             $callback = $this->normalizeMethod($callback);
         }
 
-        $decorators = $this->getDecorationsFor($callback) ?: [$this->nullDecorator()];
+        $decorators = $this->getDecorationsFor($callback);
 
         $callback = $this->getDecoratedCall($callback, $decorators);
 
@@ -105,7 +105,7 @@ class Decorator
      *
      * @return mixed
      */
-    public function getDecoratedCall($callable, $decorators): callable
+    public function getDecoratedCall($callable, array $decorators)
     {
         foreach ($decorators as $decorator) {
             if (is_string($decorator) and !Str::contains($decorator, '@')) {
