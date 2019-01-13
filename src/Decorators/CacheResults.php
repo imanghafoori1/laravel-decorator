@@ -28,6 +28,7 @@ class CacheResults
                 $cb = function () use ($callable, $params) {
                     return \App::call($callable, $params);
                 };
+
                 return cache()->$remember(...array_filter([$key, $minutes, $cb]));
             };
         };
