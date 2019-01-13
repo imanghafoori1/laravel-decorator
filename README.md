@@ -30,7 +30,7 @@ Technically, A `"Decorator"` :
 
 1 - Is a "callable" (python is an animal)
 
-2 - It takes a "callable" as it's only argument (a python swallow an other animal animal)
+2 - It takes a "callable" as it's only argument (a python swallow an other animal)
 
 3 - It returns a new "callable" (and turns into a bloated animal surrounding it.)
 
@@ -43,15 +43,24 @@ composer require imanghafoori/laravel-decorator
 
 ### A Use Case: Cache Like a Pro:
 
-Imagine that you want to put a cache layer between a `MadRepository` and a `MadController`.
+Imagine that you have a `MadController`which calls a `MadRepository` to get some `$mad` items.
 
-But they are both so mad, that they do not allow you to touch a single line of their code.
+Then after a while you decide to put a cache layer between does two for obvious reasons, but they both are so mad, that they do not allow you to touch a single line of their code.
 
-It smells like `open-closed principle` yeah ?! 👃 
+You can not, (or maybe you CAN but shouldn't) put the cache logic in your controller or your repository.
 
-**(Probably both `MadRepository` and `MadController` are imprisoned in the `vendor` folder and are part of a laravel package, so you can not touch them)**
+You want to add a new feature (caching in this case) without modifing the existing code.
+
+It smells like `Open-closed Principle` Yeah ?! 👃 
+
+And you want to keep the responsibilities seperate. In this case `caching` should not be in a repository or controller but in it's own class. 
+
+It smells like `Single Responsibility Principle` yeah ?! 👃 
+
+**(Or maybe both `MadRepository` and `MadController` are imprisoned in the `vendor` folder and are part of a laravel package, so you can not touch them)**
 
 ```php
+
 class MadController extends Controller
 {
     public function index () {
@@ -62,13 +71,15 @@ class MadController extends Controller
         ...
     }
 }
+
 ```
 
 So, what now ?!
 
-With the help of laravel-decorator built in cache decorator, you can go to `AppServiceProvider.php` (without any mad person realizing it.) 😁 
+With the help of laravel-decorator built-in cache decorator, you can go to `AppServiceProvider.php` (without any mad person realizing it.) 😁 
 
 ```php
+<?php
 
 use Imanghafoori\Decorator\Decorators\CacheResults;
 
@@ -114,7 +125,7 @@ Here we return a callable that calls the original callable and casts it's result
 
 ![image](https://user-images.githubusercontent.com/6961695/50967860-a389cd80-14ee-11e9-85a5-e3cf346942a3.png)
 
-Alternatively you can use the `\Decorator` facade to do so
+Alternatively, you can use the `\Decorator` facade to do so
 
 
 
