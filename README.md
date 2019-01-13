@@ -1,11 +1,14 @@
 # Laravel Decorator
 
 
-[![Build Status](https://travis-ci.org/imanghafoori1/laravel-widgetize.svg?branch=master)](https://travis-ci.org/imanghafoori1/laravel-widgetize)
-[![Code Quality](https://scrutinizer-ci.com/g/imanghafoori1/laravel-decorator/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/imanghafoori1/laravel-decorator/?branch=master)
+[![Build Status](https://travis-ci.org/imanghafoori1/laravel-decorator.svg?branch=master)](https://travis-ci.org/imanghafoori1/laravel-decorator)
+<a href="https://scrutinizer-ci.com/g/imanghafoori1/laravel-decorator"><img src="https://img.shields.io/scrutinizer/g/imanghafoori1/laravel-decorator.svg?style=round-square" alt="Quality Score"></img></a>
 [![StyleCI](https://github.styleci.io/repos/164699371/shield?branch=master)](https://github.styleci.io/repos/164699371)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=round-square)](LICENSE.md)
 [![Latest Stable Version](https://poser.pugx.org/imanghafoori/laravel-decorator/v/stable)](https://packagist.org/packages/imanghafoori/laravel-decorator)
+[![Code Coverage](https://scrutinizer-ci.com/g/imanghafoori1/laravel-decorator/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/imanghafoori1/laravel-decorator/?branch=master)
+
+
 
 **Made with :heart: for smart clean coders**
 
