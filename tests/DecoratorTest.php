@@ -24,6 +24,18 @@ class DecoratorTest extends TestCase
         $result = $decorator->call([new Calculator(), 'add'], [-10, -10]);
         $this->assertIsString($result);
         $this->assertEquals('-20', $result);
+
+        $decorator->unDecorate(Calculator::class.'@add', 'stringifyResult');
+        $result = $decorator->call(Calculator::class.'@add', [-10, -10]);
+        $this->assertEquals(-20, $result);
+        $this->assertIsInt($result);
+
+        $decorator->decorate(Calculator::class.'@add', 'stringifyResult');
+
+        $decorator->unDecorate(Calculator::class.'@add');
+        $result = $decorator->call(Calculator::class.'@add', [-10, -10]);
+        $this->assertEquals(-20, $result);
+        $this->assertIsInt($result);
     }
 
     public function testDecoratedWithCallbacks()

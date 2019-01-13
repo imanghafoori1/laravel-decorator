@@ -33,6 +33,11 @@ class Decorator
         $this->globalDecorators[$name] = $callback;
     }
 
+    /**
+     *
+     * @param $name
+     * @return mixed|null
+     */
     public function getGlobalDecorator($name)
     {
         return $this->globalDecorators[$name] ?? null;
@@ -40,7 +45,7 @@ class Decorator
 
     public function getDecorationsFor($callback)
     {
-        return $this->decorations[$callback] ?? [];
+        return $this->decorations[$callback] ?? null;
     }
 
     /**
@@ -71,7 +76,7 @@ class Decorator
             $callback = $this->normalizeMethod($callback);
         }
 
-        $decorators = $this->getDecorationsFor($callback);
+        $decorators = $this->getDecorationsFor($callback) ?: [$this->nullDecorator()];
 
         $callback = $this->getDecoratedCall($callback, $decorators);
 
@@ -83,7 +88,7 @@ class Decorator
         if (is_null($decorator)) {
             unset($this->decorations[$decorated]);
         } else {
-            unset($this->decorations[$decorated][$decorator]);
+            $this->decorations[$decorated] = array_diff($this->decorations[$decorated], [$decorator] );
         }
     }
 
@@ -114,11 +119,28 @@ class Decorator
     }
 
     /**
-     * @param $callable
-     * @param $decorators
+     * @param  $callable
+     * @param  $decorators
+     * @param  $params
+     * @return mixed
      */
-    public function callOnlyWith($callable, $decorators)
+    public function callOnlyWith($callable, $decorators, $params)
     {
-        $this->getDecoratedCall($callable, $decorators);
+        $callable = $this->getDecoratedCall($callable, $decorators);
+        return \App::make($callable, $params);
+    }
+
+    /**
+     * @return \Closure
+     */
+    private function nullDecorator(): \Closure
+    {
+        $nullDecorator = function ($callable) {
+            return function (...$param) use ($callable) {
+                return app()->call($callable, $param);
+            };
+        };
+
+        return $nullDecorator;
     }
 }
