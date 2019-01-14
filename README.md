@@ -19,23 +19,7 @@
 
 ![python-and-prey](https://user-images.githubusercontent.com/6961695/51078481-a2ad9300-16ca-11e9-8bf2-1d4ed214e030.jpg)
 
-#### Why this header is chosen for a laravel package ?! You will shortly see why...
-
-### What is a "Decorator" ?
-
-A decorator wraps around the original function, effectively take over it's behaviour and returns result on it's behalf..
-
-Like a python snake swallowing a deer and wraps around it's body ...
-
-Decorators take in a callable, wrap around them and return a newly born callable.
-
-Technically, A `"Decorator"` :
-
-1 - Is a "callable" (python is an animal)
-
-2 - It takes a "callable" as it's only argument (a python swallow an other animal)
-
-3 - It returns a new "callable" (and turns into a bloated animal surrounding it.)
+#### You might say, why such a horrible header :scream: is chosen for a laravel package ?! You will shortly see why...
 
 ### :truck: Installation :
 
@@ -44,7 +28,45 @@ composer require imanghafoori/laravel-decorator
 ```
 
 
-### A Use Case: Cache Like a Pro:
+
+### What is a "Decorator" ?
+
+A decorator wraps around the original function, effectively takes over it and returns result on it's behalf...
+
+Like a python snake swallowing a deer whole and wraps around it's body !
+
+Technically, A `"Decorator"` :
+
+1 - Is a "callable" (python is an animal)
+
+2 - It takes a "callable" as it's only argument (like a python swallows an other animal)
+
+3 - It returns a newly born `"callable"` that calls that `callable` (and turns into a bloated animal surrounding it.)
+
+**What ?!??! ?!!? ?!?!? ???!**
+
+#### What is a callable ?
+
+Long story short, A callable in laravel is anything that can be called with `\App::call();`
+
+#### Look at the below picture :
+
+Here you can see the bare anatomy of a decorator.
+
+![image](https://user-images.githubusercontent.com/6961695/50966481-4855dc00-14ea-11e9-884f-5e6b762b6e35.png)
+
+**Why it is a decorator ? well because :**
+
+1 - A public method is a "callable" in php.
+
+2 - The method has taken a "callable" as it's argument.
+
+3 - The whole thing surrounded by the black line is a closure, which is "returned" from the method.
+
+
+## A Use Case: 
+
+### Cache Like a Pro:
 
 Imagine that you have a `MadController`which calls a `MadRepository` to get some `$mad` items.
 
@@ -101,26 +123,6 @@ You will get cached results from your Facade calls, in your entire app without c
 
 
 
-
-#### What is a callable ?
-
-Long story short, A callable in laravel is anything that can be called with `\App::call();`
-
-#### Look at the below picture :
-
-Here you can see the bare anatomy of a decorator.
-
-![image](https://user-images.githubusercontent.com/6961695/50966481-4855dc00-14ea-11e9-884f-5e6b762b6e35.png)
-
-**Why it is a decorator ? well because :**
-
-1 - A public method is a "callable" in php.
-
-2 - The method has taken a "callable" as it's argument.
-
-3 - The whole thing surrounded by the black line is a closure, which is "returned" from the method.
-
-
 Here we return a callable that calls the original callable and casts it's result into string.
 
 
@@ -132,11 +134,11 @@ Alternatively, you can use the `\Decorator` facade to do so
 
 
 
-**It's time to enjoy having a decorated call :".**
+**It's time to enjoy having a decorated call :"**
 
 ![image](https://user-images.githubusercontent.com/6961695/50968397-2bbca280-14f0-11e9-85c9-4112e14da056.png)
 
-**Note:** that finally a closure is returned (not the actual value)
+**Note:** finally a closure is returned here (not the actual value)
 
 ### Sample decorators:
 
@@ -192,8 +194,6 @@ For example a method call which returns `int|null` should not unexpectedly retur
 Since the users of the method should be ready for type of value they get back.
 
 But if you return only `int` and your decorator causes the `null` value to be filtered out. that's ok.
-
-
 
 
 ### :exclamation: Security
