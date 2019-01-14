@@ -1,4 +1,4 @@
-# Laravel Decorator
+# :christmas_tree: Laravel Decorator 
 
 
 [![Build Status](https://travis-ci.org/imanghafoori1/laravel-decorator.svg?branch=master)](https://travis-ci.org/imanghafoori1/laravel-decorator)
