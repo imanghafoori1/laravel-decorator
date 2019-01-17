@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\App;
-use Imanghafoori\Decorator\Decorators\CacheResults;
+use Imanghafoori\Decorator\Decorators\DecoratorFactory;
 
 class CacheResultDecoratorTest extends TestCase
 {
@@ -9,7 +9,7 @@ class CacheResultDecoratorTest extends TestCase
     {
         app()->singleton('abc', abc::class);
         \MyFacade::forgetDecorations('getGiven');
-        \MyFacade::decorateMethod('getGiven', CacheResults::cache('hello'));
+        \MyFacade::decorateMethod('getGiven', DecoratorFactory::cache('hello', 2));
 
         App::shouldReceive('call')->once()->andReturn('We may never know?!');
 
@@ -24,12 +24,18 @@ class CacheResultDecoratorTest extends TestCase
     {
         app()->singleton('abc', abc::class);
         \MyFacade::forgetDecorations('getGiven');
-        \MyFacade::decorateMethod('getGiven', CacheResults::foreverCache('hello'));
+        \MyFacade::decorateMethod('getGiven', DecoratorFactory::foreverCache(function ($a) {
+            return 'cache_key_'.$a;
+        }));
 
-        App::shouldReceive('call')->once()->andReturn('We may never know?!');
+        App::shouldReceive('call')->twice()->andReturn('We may never know?!');
 
         $this->assertEquals('We may never know?!', \MyFacade::getGiven(1));
         $this->assertEquals('We may never know?!', \MyFacade::getGiven(1));
+        $this->assertEquals('We may never know?!', \MyFacade::getGiven(2));
+        $this->assertEquals('We may never know?!', \MyFacade::getGiven(1));
+        $this->assertEquals('We may never know?!', \MyFacade::getGiven(2));
+        $this->assertEquals('We may never know?!', \MyFacade::getGiven(2));
         $this->assertEquals('We may never know?!', \MyFacade::getGiven(1));
 
         \MyFacade::forgetDecorations('getGiven');

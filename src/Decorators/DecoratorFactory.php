@@ -2,7 +2,7 @@
 
 namespace Imanghafoori\Decorator\Decorators;
 
-class CacheResults
+class DecoratorFactory
 {
     public static function cache($key, $minutes = 1)
     {
@@ -28,6 +28,10 @@ class CacheResults
                 $cb = function () use ($callable, $params) {
                     return \App::call($callable, $params);
                 };
+
+                if (is_callable($key)) {
+                    $key = $key(...$params);
+                }
 
                 return cache()->$remember(...array_filter([$key, $minutes, $cb], function ($el) {
                     return !is_null($el);
