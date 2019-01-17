@@ -64,6 +64,7 @@ Here you can see the bare anatomy of a decorator.
 3 - The whole thing surrounded by the black line is a closure, which is "returned" from the method.
 
 
+
 ## A Use Case: 
 
 ### Cache Like a Pro:
@@ -145,6 +146,18 @@ Alternatively, you can use the `\Decorator` facade to do so
 For good working examples please take a look at the tests folder.
 
 
+### Naming Your Decorators:
+
+```php
+
+public function boot () {
+    \Decorator::define('myDecoratorName', 'SomeClass@someMethod');
+}
+
+```
+Then you can use this name (`myDecoratorName`) to decorate methods.
+
+
 ### How to apply a decorator on a method ?
 
 ```php
@@ -152,6 +165,10 @@ For good working examples please take a look at the tests folder.
 // You may set multiple decorators on a single method...
 
 \Decorator::decorate('class@method, 'someClass@someOtherDecorator');
+
+// or
+
+\Decorator::decorate('class@method, 'myDecoratorName');
 
 ```
 
