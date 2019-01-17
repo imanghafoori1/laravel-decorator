@@ -151,7 +151,13 @@ For good working examples please take a look at the tests folder.
 ```php
 
 public function boot () {
-    \Decorator::define('myDecoratorName', 'SomeClass@someMethod');
+    \Decorator::define('myDecoratorName1', 'SomeClass@someMethod');
+    
+// or
+
+    \Decorator::define('myDecoratorName2', function ($callable) {
+        return function (...) use ($callable){ ... } 
+    });
 }
 
 ```
@@ -166,7 +172,7 @@ Then you can use this name (`myDecoratorName`) to decorate methods.
 
 \Decorator::decorate('class@method, 'someClass@someOtherDecorator');
 
-// or
+// or reference the decorator by it's name :
 
 \Decorator::decorate('class@method, 'myDecoratorName');
 
