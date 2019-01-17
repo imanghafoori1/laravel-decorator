@@ -29,11 +29,13 @@ composer require imanghafoori/laravel-decorator
 
 
 
-### What is a "Decorator" ?
+### What is a `"Decorator"` :question:
 
-A decorator wraps around the original function, effectively takes over it and returns result on it's behalf...
+A decorator is callable which wraps around the original decorated callable, in order to form a new callable composed of the previous two.
 
 Like a python snake swallowing a deer whole and wraps around it's body !
+
+After that the snake becomes capable to eat and digest grasses :herb: but only if the deer is still alive.
 
 Technically, A `"Decorator"` :
 
@@ -45,9 +47,9 @@ Technically, A `"Decorator"` :
 
 **What ?!??! ?!!? ?!?!? ???!**
 
-#### What is a callable ?
+#### What is a "`callable`", man ?!
 
-Long story short, A callable in laravel is anything that can be called with `\App::call();`
+Long story short, A callable (here in laravel) is anything that can be called (invoked) with `\App::call();`
 
 #### Look at the below picture :
 
@@ -93,7 +95,7 @@ class MadController extends Controller
     
         // we don't want to put any cache logic here...
         
-        $mads = MadRepositoryFacade::getAllMads();
+        $madUser = MadRepositoryFacade::geMadUser($madId);
         ...
     }
 }
@@ -107,13 +109,17 @@ With the help of laravel-decorator built-in cache decorator, you can go to `AppS
 ```php
 <?php
 
-use Imanghafoori\Decorator\Decorators\CacheResults;
+use Imanghafoori\Decorator\Decorators\DecoratorFactory;
 
 class AppServiceProvider extends ServiceProvider {
 
     public function boot( ) {
 
-        MadRepositoryFacade::decorateAll('getAllMads', CacheResults::cache('myKey', 10));
+        $keyMaker = function ($madId) {
+            return 'mad_user_key_' . $madId;
+        };
+        
+        MadRepositoryFacade::decorateMethod('geMadUser', DecoratorFactory::cache($keyMaker, 10));
     }
 }
 
@@ -122,6 +128,11 @@ Just that.
 
 You will get cached results from your Facade calls, in your entire app without changing a single line of code !!
 
+```php
+// you get cached results then ! Nice ?!
+$madUser = MadRepositoryFacade::geMadUser($madId);
+
+```
 
 
 Here we return a callable that calls the original callable and casts it's result into string.
