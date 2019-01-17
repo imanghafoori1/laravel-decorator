@@ -32,6 +32,13 @@
     "scripts": {
         "test": "phpunit"
     },
+    "suggest": {
+        "imanghafoori/laravel-heyman": "It allows to write expressive code to authorize, validate and authenticate.",
+        "imanghafoori/laravel-widgetize": "Gives you a better structure and caching opportunity for your laravel apps.",
+        "imanghafoori/laravel-masterpass": "You can set a master password for your accounts.",
+        "imanghafoori/laravel-anypass": " Allows you login with any password in local environment.",
+        "imanghafoori/laravel-terminator": "Gives you opportunity to refactor your controllers."
+    },
     "extra": {
         "laravel": {
             "providers": [
