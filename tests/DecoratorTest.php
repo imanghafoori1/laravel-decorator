@@ -197,6 +197,7 @@ class Calculator implements ICalculator
     public function arraySum(...$x)
     {
         app()->call($this->addToStr($x, $y));
+
         return array_sum($x);
     }
 
