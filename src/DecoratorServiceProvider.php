@@ -11,13 +11,13 @@ class DecoratorServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->app->singleton(DecoratorFactory::class, DecoratorFactory::class);
-        $this->app->singleton(Decorator::class, Decorator::class);
+        $this->app->singleton(DecoratorFactory::class);
+        $this->app->singleton(Decorator::class);
         $this->app->singleton('decorator', Decorator::class);
     }
 
     public function provides()
     {
-        return [Decorator::class, 'decorator', ResultCacher::class];
+        return [Decorator::class, 'decorator', DecoratorFactory::class];
     }
 }

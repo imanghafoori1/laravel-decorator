@@ -14,6 +14,16 @@ class DecoratorFactory
         return self::getDecoratorFactory($key, 'rememberForever');
     }
 
+    public static function variadicParam()
+    {
+        return function ($callable) {
+            return function (...$param) use ($callable) {
+                $param = is_array($param[0]) ? $param[0] : $param;
+                return app()->call($callable, $param);
+            };
+        };
+    }
+
     /**
      * @param $key
      * @param $minutes
