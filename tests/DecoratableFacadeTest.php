@@ -1,6 +1,7 @@
 <?php
 
 use Imanghafoori\Decorator\Decorator;
+use Imanghafoori\Decorator\IamDecoratable;
 
 class DecoratableFacadeTest extends TestCase
 {
@@ -79,6 +80,16 @@ class DecoratableFacadeTest extends TestCase
 
 class MyFacade extends \Imanghafoori\Decorator\DecoratableFacade
 {
+    protected static function getFacadeAccessor()
+    {
+        return 'abc';
+    }
+}
+
+class MyFacadeWithTrait extends \Illuminate\Support\Facades\Facade
+{
+    use IamDecoratable;
+
     protected static function getFacadeAccessor()
     {
         return 'abc';
