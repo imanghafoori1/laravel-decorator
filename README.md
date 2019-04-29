@@ -45,7 +45,7 @@ Technically, A `"Decorator"` :
 
 3 - It returns a newly born `"callable"` that calls that `callable` (and turns into a bloated animal surrounding it.)
 
-**What ?!??! ?!!? ?!?!? ???!**
+**What ?!??! ?!!? ?!?!? ???!** (0_o)
 
 #### What is a "`callable`", man ?!
 
@@ -63,7 +63,7 @@ Here you can see the bare anatomy of a decorator.
 
 2 - The method has taken a "callable" as it's argument.
 
-3 - The whole thing surrounded by the black line is a closure, which is "returned" from the method.
+3 - The whole thing surrounded by the black line is a closure hence a "callable", and is returned from the method.
 
 
 
@@ -95,7 +95,7 @@ class MadController extends Controller
     
         // we don't want to put any cache logic here...
         
-        $madUser = MadRepositoryFacade::geMadUser($madId);
+        $madUser = MadRepositoryFacade::getMadUser($madId);
         ...
     }
 }
@@ -119,7 +119,7 @@ class AppServiceProvider extends ServiceProvider {
             return 'mad_user_key_' . $madId;
         };
         
-        MadRepositoryFacade::decorateMethod('geMadUser', DecoratorFactory::cache($keyMaker, 10));
+        MadRepositoryFacade::decorateMethod('getMadUser', DecoratorFactory::cache($keyMaker, 10));
     }
 }
 
