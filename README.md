@@ -230,10 +230,6 @@ Since the users of the method should be ready for type of value they get back.
 But if you return only `int` and your decorator causes the `null` value to be filtered out. that's ok.
 
 
-### :exclamation: Security
-If you discover any security related issues, please email imanghafoori1@gmail.com instead of using the issue tracker.
-
-
 ### :star: Your Stars Make Us Do More :star:
 
 As always if you found this package useful and you want to encourage us to maintain and work on it, Please `press the star button` to declare your willing.
@@ -256,7 +252,6 @@ As always if you found this package useful and you want to encourage us to maint
 :gem: It allows you login with any password in local environment only.
 
 - https://github.com/imanghafoori1/laravel-anypass
-
 
 ------------
 
