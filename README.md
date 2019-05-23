@@ -7,7 +7,7 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=round-square)](LICENSE.md)
 [![Latest Stable Version](https://poser.pugx.org/imanghafoori/laravel-decorator/v/stable)](https://packagist.org/packages/imanghafoori/laravel-decorator)
 [![Code Coverage](https://scrutinizer-ci.com/g/imanghafoori1/laravel-decorator/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/imanghafoori1/laravel-decorator/?branch=master)
-
+[![Total Downloads](https://poser.pugx.org/imanghafoori/laravel-decorator/downloads)](https://packagist.org/packages/imanghafoori/laravel-decorator)
 
 
 **Made with :heart: for smart clean coders**
