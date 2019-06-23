@@ -35,7 +35,7 @@ A decorator is callable which wraps around the original decorated callable, in o
 
 Like a python snake swallowing a deer whole and wraps around it's body !
 
-After that the snake becomes capable to eat and digest grasses :herb: but only if the deer is still alive.
+After that the snake becomes capable to eat and digest grasses :herb: because it has a deer inside it.
 
 Technically, A `"Decorator"` :
 
@@ -45,11 +45,11 @@ Technically, A `"Decorator"` :
 
 3 - It generates and returns a new `"callable"` (which internally calls the original `callable`, putting some code before and after it.)
 
-**What ?!??! ?!!? ?!?!? ???!** (0_o)
+**What ?!??! ???!** (0_o)
 
 #### What is a "`callable`", man ?!
 
-Long story short, A callable (here in laravel) is anything that can be called (invoked) with `\App::call();` 
+Long story short, A callable (here in laravel) is anything that can be called (invoked) with `App::call();` or `call_user_func()`
 like: 'MyClass@myMethod' or a closure, etc
 
 ## A Use Case: 
