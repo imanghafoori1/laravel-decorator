@@ -43,7 +43,7 @@ Technically, A `"Decorator"` :
 
 2 - It takes a "callable" as it's only argument (like a python swallows an other animal)
 
-3 - It returns a newly born `"callable"` that calls that `callable` (and turns into a bloated animal surrounding it.)
+3 - It returns a newly born `"callable"` (which internally calls the original `callable`, putting some code before and after it.)
 
 **What ?!??! ?!!? ?!?!? ???!** (0_o)
 
