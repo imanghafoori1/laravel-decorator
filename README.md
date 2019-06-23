@@ -51,31 +51,16 @@ Technically, A `"Decorator"` :
 
 Long story short, A callable (here in laravel) is anything that can be called (invoked) with `\App::call();`
 
-#### Look at the below picture :
-
-Here you can see the bare anatomy of a decorator.
-
-![image](https://user-images.githubusercontent.com/6961695/50966481-4855dc00-14ea-11e9-884f-5e6b762b6e35.png)
-
-**Why it is a decorator ? well because :**
-
-1 - A public method is a "callable" in php.
-
-2 - The method has taken a "callable" as it's argument.
-
-3 - The whole thing surrounded by the black line is a closure hence a "callable", and is returned from the method.
-
-
 
 ## A Use Case: 
 
 ### Cache Like a Pro:
 
-Imagine that you have a `MadController`which calls a `MadRepository` to get some `$mad` items.
+Imagine that you have a `MadController`which calls a `MadRepository` to get some `$mad` value.
 
-Then after a while you decide to put a cache layer between does two for obvious reasons, but they both are so mad, that they do not allow you to touch a single line of their code.
+Then after a while you decide to put a cache layer between those two classes for obvious reasons, but both controller and repo class are so mad, that they do not allow you to touch a single line of their code.
 
-You can not, (or maybe you CAN but shouldn't) put the cache logic in your controller or your repository.
+According to SOLID principles, you can not, (or maybe you CAN but shouldn't) put the cache logic in your controller or your repository.
 
 You want to add a new feature (caching in this case) without modifing the existing code.
 
