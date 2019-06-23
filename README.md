@@ -39,18 +39,18 @@ After that the snake becomes capable to eat and digest grasses :herb: but only i
 
 Technically, A `"Decorator"` :
 
-1 - Is a "callable" (python is an animal)
+1 - Is a "callable"
 
-2 - It takes a "callable" as it's only argument (like a python swallows an other animal)
+2 - It takes an other "callable" as it's only argument (like a python swallows an other animal)
 
-3 - It returns a newly born `"callable"` (which internally calls the original `callable`, putting some code before and after it.)
+3 - It generates and returns a new `"callable"` (which internally calls the original `callable`, putting some code before and after it.)
 
 **What ?!??! ?!!? ?!?!? ???!** (0_o)
 
 #### What is a "`callable`", man ?!
 
-Long story short, A callable (here in laravel) is anything that can be called (invoked) with `\App::call();`
-
+Long story short, A callable (here in laravel) is anything that can be called (invoked) with `\App::call();` 
+like: 'MyClass@myMethod' or a closure, etc
 
 ## A Use Case: 
 
