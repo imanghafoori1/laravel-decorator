@@ -124,28 +124,9 @@ but rememnber to change :
  app()->call('UserRepository@find', ...
  // to :
   app('decorator')->call('UserRepository@find', ...
+```
 
-
-**So Let's apply this to decorate on the baz method on the Bar class :".**
-
-![image](https://user-images.githubusercontent.com/6961695/50967860-a389cd80-14ee-11e9-85a5-e3cf346942a3.png)
-
-Alternatively, you can use the `\Decorator` facade to do so
-
-
-
-**It's time to enjoy having a decorated call :"**
-
-![image](https://user-images.githubusercontent.com/6961695/50968397-2bbca280-14f0-11e9-85c9-4112e14da056.png)
-
-**Note:** finally a closure is returned here (not the actual value)
-
-### Sample decorators:
-
-For good working examples please take a look at the tests folder.
-
-
-### Naming Your Decorators:
+### Define Your Own Decorators:
 
 ```php
 
@@ -163,22 +144,20 @@ public function boot () {
 Then you can use this name (`myDecoratorName`) to decorate methods.
 
 
-### How to apply a decorator on a method ?
+### How to decorate a method ?
 
 ```php
 
-// You may set multiple decorators on a single method...
-
-\Decorator::decorate('class@method, 'someClass@someOtherDecorator');
+// You may set multiple decorators on a single method... 
+\Decorator::decorate('class@method, 'someClass@someOtherDecorator'); // (first)
 
 // or reference the decorator by it's name :
-
-\Decorator::decorate('class@method, 'myDecoratorName');
+\Decorator::decorate('class@method, 'myDecoratorName'); // (second)
 
 ```
 
 
-### How to call a method with it's decorator ?
+### How to call a method with it's decorators ?
 
 ![image](https://user-images.githubusercontent.com/6961695/51078628-970f9b80-16cd-11e9-8b23-267b2d1564e7.png)
 
