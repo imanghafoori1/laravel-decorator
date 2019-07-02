@@ -54,13 +54,18 @@ like: `'MyClass@myMethod`' or a closure, `[UserRepo::class, 'find']`
 
 ### Cache Like a Pro:
 
-Caching DB queries is always a need.
+Caching DB queries is always a need,
+
+but it is always annoying to add more code to the existing code.
+It will become more messy, we may break the current code, after all it adds a layer of fog. Yeah ?
+
 
 Imagine that you have a `UserController`which calls a `UserRepo@find` to get a `$user` .
 
-Then after a while you decide to put a cache layer between those two classes for obvious reasons but both controller and repo class are so mad, that they do not allow you to touch a single line of their code.
+Then after a while you decide to put a cache layer between those two classes for obvious reasons.
 
 According to SOLID principles, you shouldn't put the caching code logic neither in your controller nor your UserRepo.
+But somewhere in between.
 
 In other words, you want to add a new feature (caching in this case) without modifing the existing code.
 
@@ -113,7 +118,12 @@ class AppServiceProvider extends ServiceProvider {
 ```
 
 You will get cached results from your calls, in your `UserController` without touching it !
+but rememnber to change :
 
+```php
+ app()->call('UserRepository@find', ...
+ // to :
+  app('decorator')->call('UserRepository@find', ...
 
 
 **So Let's apply this to decorate on the baz method on the Bar class :".**
