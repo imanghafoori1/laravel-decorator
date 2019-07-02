@@ -1,5 +1,6 @@
 # :christmas_tree: Laravel Decorator 
 
+### Decorator pattern in laravel apps
 
 [![Build Status](https://travis-ci.org/imanghafoori1/laravel-decorator.svg?branch=master)](https://travis-ci.org/imanghafoori1/laravel-decorator)
 <a href="https://scrutinizer-ci.com/g/imanghafoori1/laravel-decorator"><img src="https://img.shields.io/scrutinizer/g/imanghafoori1/laravel-decorator.svg?style=round-square" alt="Quality Score"></img></a>
@@ -13,13 +14,12 @@
 **Made with :heart: for smart clean coders**
 
 
-## A try to port "decorator" feature from python language to laravel framework.
+### A try to port "decorator" feature from python language to laravel framework.
 
 
 
 ![python-and-prey](https://user-images.githubusercontent.com/6961695/51078481-a2ad9300-16ca-11e9-8bf2-1d4ed214e030.jpg)
 
-#### You might say, why such a horrible header :scream: is chosen for a laravel package ?! You will shortly see why...
 
 ### :truck: Installation :
 
@@ -41,55 +41,55 @@ Technically, A `"Decorator"` :
 
 1 - Is a "callable"
 
-2 - It takes an other "callable" as it's only argument (like a python swallows an other animal)
+2 - which takes an other "callable" (as it's only argument, like a snake swallows an other snake)
 
-3 - It generates and returns a new `"callable"` (which internally calls the original `callable`, putting some code before and after it.)
+3 - and returns a new `"callable"` (which internally calls the original `callable`, putting some code before and after it.)
 
 **What ?!??! ???!** (0_o)
 
-#### What is a "`callable`", man ?!
+#### What can be considered as a "`callable`" within laravel ?!
 
-Long story short, A callable (here in laravel) is anything that can be called (invoked) with `App::call();` or `call_user_func()`
-like: 'MyClass@myMethod' or a closure, etc
-
-## A Use Case: 
+Long story short, anything that can be called (invoked) with `App::call();` or `call_user_func()`
+like: `'MyClass@myMethod`' or a closure, `[UserRepo::class, 'find']`
 
 ### Cache Like a Pro:
 
-Imagine that you have a `MadController`which calls a `MadRepository` to get some `$mad` value.
+Caching DB queries is always a need.
 
-Then after a while you decide to put a cache layer between those two classes for obvious reasons, but both controller and repo class are so mad, that they do not allow you to touch a single line of their code.
+Imagine that you have a `UserController`which calls a `UserRepo@find` to get a `$user` .
 
-According to SOLID principles, you can not, (or maybe you CAN but shouldn't) put the cache logic in your controller or your repository.
+Then after a while you decide to put a cache layer between those two classes for obvious reasons but both controller and repo class are so mad, that they do not allow you to touch a single line of their code.
 
-You want to add a new feature (caching in this case) without modifing the existing code.
+According to SOLID principles, you shouldn't put the caching code logic neither in your controller nor your UserRepo.
+
+In other words, you want to add a new feature (caching in this case) without modifing the existing code.
 
 It smells like `Open-closed Principle` Yeah ?! 👃 
 
-And you want to keep the responsibilities seperate. In this case `caching` should not be in a repository or controller but in it's own class. 
+You want to keep the responsibilities seperate. In this case `caching` should not be in a repository or controller but in it's own class. 
 
 It smells like `Single Responsibility Principle` yeah ?! 👃 
 
-**(Or maybe both `MadRepository` and `MadController` are imprisoned in the `vendor` folder and are part of a laravel package, so you can not touch them)**
-
 ```php
 
-class MadController extends Controller
+class UserRepository
 {
-    public function index () {
-    
-        // we don't want to put any cache logic here...
-        
-        $madUser = MadRepositoryFacade::getMadUser($madId);
-        ...
+    function find($uid) {
+        return User::find($uid);
+    }
+}
+
+class MadUsersController extends Controller
+{
+    function show ($madUserId) {
+        $madUser = app()->call('UserRepository@find', ['id' => $madUserId]);
     }
 }
 
 ```
+ok now there is no cache, going on. it is a direct call.
 
-So, what now ?!
-
-With the help of laravel-decorator built-in cache decorator, you can go to `AppServiceProvider.php` (without any mad person realizing it.) 😁 
+With the help of laravel-decorator built-in cache decorator, you can go to `AppServiceProvider.php` or any other service provider 
 
 ```php
 <?php
@@ -103,24 +103,17 @@ class AppServiceProvider extends ServiceProvider {
         $keyMaker = function ($madId) {
             return 'mad_user_key_' . $madId;
         };
+        $time = 10;
+        $decorator = DecoratorFactory::cache($keyMaker, $time);
         
-        MadRepositoryFacade::decorateMethod('getMadUser', DecoratorFactory::cache($keyMaker, 10));
+        \Decorator::decorate('UserRepository@find, $decorator);
     }
 }
 
 ```
-Just that.
 
-You will get cached results from your Facade calls, in your entire app without changing a single line of code !!
+You will get cached results from your calls, in your `UserController` without touching it !
 
-```php
-// you get cached results then ! Nice ?!
-$madUser = MadRepositoryFacade::geMadUser($madId);
-
-```
-
-
-Here we return a callable that calls the original callable and casts it's result into string.
 
 
 **So Let's apply this to decorate on the baz method on the Bar class :".**
