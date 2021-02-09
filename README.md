@@ -111,7 +111,7 @@ class AppServiceProvider extends ServiceProvider {
         $time = 10;
         $decorator = DecoratorFactory::cache($keyMaker, $time);
         
-        \Decorator::decorate('UserRepository@find, $decorator);
+        \Decorator::decorate('UserRepository@find', $decorator);
     }
 }
 
