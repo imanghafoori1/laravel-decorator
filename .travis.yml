@@ -20,6 +20,7 @@ before_install:
 
 install:
   - travis_retry composer install --no-suggest
+  - composer update
 
 script:
   - vendor/bin/phpunit --coverage-clover clover.xml;
