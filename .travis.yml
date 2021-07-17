@@ -17,10 +17,10 @@ matrix:
 
 before_install:
   - composer self-update --stable -n
+  - composer update
 
 install:
   - travis_retry composer install --no-suggest
-  - composer update
 
 script:
   - vendor/bin/phpunit --coverage-clover clover.xml;
