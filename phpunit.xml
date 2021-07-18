@@ -20,9 +20,6 @@
         <env name="CACHE_DRIVER" value="array"/>
         <env name="SESSION_DRIVER" value="array"/>
     </php>
-    <logging>
-        <log type="coverage-clover" target="/tmp/coverage.xml"/>
-    </logging>
     <filter>
 
         <whitelist addUncoveredFilesFromWhitelist="true">
