@@ -79,6 +79,7 @@ class Decorator
         $decorators = $this->getDecorationsFor($callback);
         $callback = $this->decorateWith($callback, $decorators);
         $parameters = $this->getCallParams($callback, $parameters);
+
         return app()->call($callback, $parameters, $defaultMethod);
     }
 
@@ -112,10 +113,8 @@ class Decorator
             }
 
             is_array($decorator)
-                ?$params=$this->getCallParams($this->normalizeMethod($decorator), [$callable])
-                :$params=$this->getCallParams($decorator, [$callable]);
-
-
+                ? $params = $this->getCallParams($this->normalizeMethod($decorator), [$callable])
+                : $params = $this->getCallParams($decorator, [$callable]);
 
             $callable = app()->call($decorator, $params);
         }
@@ -138,11 +137,14 @@ class Decorator
     }
 
     /**
-     * get App::Call Callable Parameters
+     * get App::Call Callable Parameters.
+     *
      * @param $callable
      * @param array $params
-     * @return array
+     *
      * @throws \ReflectionException
+     *
+     * @return array
      */
     public function getCallParams($callable, array $params): array
     {
@@ -152,14 +154,14 @@ class Decorator
             $class = explode('@', $callable);
             $argName = get_method_argNames($class[0], $class[1]);
         }
-        $parameters=array_map(function ($MArgName, $Parameters) use ($argName) {
-
-            return [$MArgName??$argName[count($argName)-1]=>$Parameters];
+        $parameters = array_map(function ($MArgName, $Parameters) use ($argName) {
+            return [$MArgName ?? $argName[count($argName) - 1]=>$Parameters];
         }, $argName, $params);
 
-        count($parameters)==1
-            ?$parameters=$parameters[0]
-            :$parameters=array_merge_recursive($parameters[0], $parameters[1]);
+        count($parameters) == 1
+            ? $parameters = $parameters[0]
+            : $parameters = array_merge_recursive($parameters[0], $parameters[1]);
+
         return $parameters;
     }
 }

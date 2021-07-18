@@ -91,13 +91,13 @@ class DecoratorTest extends TestCase
 
         $stringifyDecorator = function ($decorated) {
             return function (...$params) use ($decorated) {
-                return (string) app()->call($decorated, app('decorator')->getCallParams($decorated,$params[0]));
+                return (string) app()->call($decorated, app('decorator')->getCallParams($decorated, $params[0]));
             };
         };
 
         $intifyParamsDecorator = function ($decorated) {
             return function ($x, $y) use ($decorated) {
-                return app()->call($decorated, app('decorator')->getCallParams($decorated,[(int) $x, (int) $y]));
+                return app()->call($decorated, app('decorator')->getCallParams($decorated, [(int) $x, (int) $y]));
             };
         };
 
@@ -122,7 +122,7 @@ class DecoratorTest extends TestCase
                 $x = ($x < -20) ? -20 : $x;
                 $y = ($y < -20) ? -20 : $y;
 
-                return app()->call($callback, app('decorator')->getCallParams($callback,[$x, $y]));
+                return app()->call($callback, app('decorator')->getCallParams($callback, [$x, $y]));
             };
         });
 
@@ -159,7 +159,7 @@ class DecoratorTest extends TestCase
     {
         return function ($callable) {
             return function (...$params) use ($callable) {
-                return (string) app()->call($callable, app('decorator')->getCallParams($callable,$params[0]));
+                return (string) app()->call($callable, app('decorator')->getCallParams($callable, $params[0]));
             };
         };
     }
@@ -173,7 +173,7 @@ class DecoratorTest extends TestCase
     {
         return function ($callable) use ($max) {
             return function (...$params) use ($callable, $max) {
-                $result = app()->call($callable, app('decorator')->getCallParams($callable,$params[0]));
+                $result = app()->call($callable, app('decorator')->getCallParams($callable, $params[0]));
 
                 return ($result > $max) ? $max : $result;
             };
@@ -211,7 +211,7 @@ class ResultCasterDecorator
     public function toStringDecorator($callable)
     {
         return function (...$params) use ($callable) {
-            return (string) app()->call($callable, app('decorator')->getCallParams($callable,is_array($params[0])?$params[0]:$params));
+            return (string) app()->call($callable, app('decorator')->getCallParams($callable, is_array($params[0]) ? $params[0] : $params));
         };
     }
 
@@ -238,14 +238,14 @@ class ResultCasterDecorator
     public static function toInt($callable)
     {
         return function (...$params) use ($callable) {
-            return (int) app()->call($callable,app('decorator')->getCallParams($callable,is_array($params[0])?$params[0]:$params));
+            return (int) app()->call($callable, app('decorator')->getCallParams($callable, is_array($params[0]) ? $params[0] : $params));
         };
     }
 
     public function _toString($callable)
     {
         return function (...$params) use ($callable) {
-            return (string) app()->call($callable, ['x'=>$params[0][0],'y'=>$params[0][1]]);
+            return (string) app()->call($callable, ['x'=>$params[0][0], 'y'=>$params[0][1]]);
         };
     }
 }
