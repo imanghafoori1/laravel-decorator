@@ -16,6 +16,6 @@ class Decorator extends LaravelFacade
 {
     protected static function getFacadeAccessor()
     {
-        return \Imanghafoori\Decorator\Decorator::class;
+        return 'decorator';
     }
 }
