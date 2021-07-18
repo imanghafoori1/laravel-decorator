@@ -1,3 +1,14 @@
-vendor
+*.php_cs.cache
+.phpstorm.meta.php
+/phpunit.bat 
+# PhpStorm project's cache
 .idea
-log
+
+# VSCode project's cache
+.vscode
+
+# phpunit cache
+.phpunit.result.cache
+
+# Vendor directory
+vendor/
