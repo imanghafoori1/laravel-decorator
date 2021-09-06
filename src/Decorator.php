@@ -77,8 +77,8 @@ class Decorator
         }
 
         $decorators = $this->getDecorationsFor($callback);
-
         $callback = $this->decorateWith($callback, $decorators);
+        $parameters = $this->getCallParams($callback, $parameters);
 
         return app()->call($callback, $parameters, $defaultMethod);
     }
@@ -112,7 +112,11 @@ class Decorator
                 $decorator = $this->globalDecorators[$decorator];
             }
 
-            $callable = app()->call($decorator, [$callable]);
+            is_array($decorator)
+                ? $params = $this->getCallParams($this->normalizeMethod($decorator), [$callable])
+                : $params = $this->getCallParams($decorator, [$callable]);
+
+            $callable = app()->call($decorator, $params);
         }
 
         return $callable;
@@ -130,5 +134,34 @@ class Decorator
         $callable = $this->decorateWith($callable, $decorators);
 
         return \App::make($callable, $params);
+    }
+
+    /**
+     * get App::Call Callable Parameters.
+     *
+     * @param $callable
+     * @param array $params
+     *
+     * @throws \ReflectionException
+     *
+     * @return array
+     */
+    public function getCallParams($callable, array $params): array
+    {
+        if (is_callable($callable)) {
+            $argName = get_func_argNames($callable);
+        } else {
+            $class = explode('@', $callable);
+            $argName = get_method_argNames($class[0], $class[1]);
+        }
+        $parameters = array_map(function ($MArgName, $Parameters) use ($argName) {
+            return [$MArgName ?? $argName[count($argName) - 1]=>$Parameters];
+        }, $argName, $params);
+
+        count($parameters) == 1
+            ? $parameters = $parameters[0]
+            : $parameters = array_merge_recursive($parameters[0], $parameters[1]);
+
+        return $parameters;
     }
 }
