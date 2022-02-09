@@ -123,9 +123,9 @@ class Decorator
     }
 
     /**
-     * @param  $callable
-     * @param  $decorators
-     * @param  $params
+     * @param $callable
+     * @param $decorators
+     * @param $params
      *
      * @return mixed
      */
