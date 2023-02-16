@@ -12,3 +12,5 @@
 
 # Vendor directory
 vendor/
+
+phpunit.xml
