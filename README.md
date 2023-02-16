@@ -13,20 +13,17 @@
 
 **Made with :heart: for smart clean coders**
 
-
 ### A try to port "decorator" feature from python language to laravel framework.
-
 
 
 ![python-and-prey](https://user-images.githubusercontent.com/6961695/51078481-a2ad9300-16ca-11e9-8bf2-1d4ed214e030.jpg)
 
 
-### :truck: Installation :
+### :truck: Installation:
 
 ```
 composer require imanghafoori/laravel-decorator
 ```
-
 
 
 ### What is a `"Decorator"` :question:
@@ -37,15 +34,15 @@ Like a python snake swallowing a deer whole and wraps around it's body !
 
 After that the snake becomes capable to eat and digest grasses :herb: because it has a deer inside it.
 
-Technically, A `"Decorator"` :
+Technically, A `"Decorator"`:
 
-1 - Is a "callable"
+1- Is a "callable"
 
-2 - which takes an other "callable" (as it's only argument, like a snake swallows an other snake)
+2- which takes an other "callable" (as it's only argument, like a snake swallows an other snake)
 
-3 - and returns a new `"callable"` (which internally calls the original `callable`, putting some code before and after it.)
+3- and returns a new `"callable"` (which internally calls the original `callable`, putting some code before and after it.)
 
-**What ?!??! ???!** (0_o)
+**What?!??! ???!** (0_o)
 
 #### What can be considered as a "`callable`" within laravel ?!
 
@@ -54,10 +51,8 @@ like: `'MyClass@myMethod`' or a closure, `[UserRepo::class, 'find']`
 
 ### Cache Like a Pro:
 
-Caching DB queries is always a need,
-
-but it is always annoying to add more code to the existing code.
-It will become more messy, we may break the current code, after all it adds a layer of fog. Yeah ?
+Caching DB queries is always a need, but it is always annoying to add more code to the existing code.
+It will become more messy, we may break the current code, after all it adds a layer of fog. Yeah?
 
 
 Imagine that you have a `UserController`which calls a `UserRepo@find` to get a `$user` .
@@ -69,24 +64,26 @@ But somewhere in between.
 
 In other words, you want to add a new feature (caching in this case) without modifing the existing code.
 
-It smells like `Open-closed Principle` Yeah ?! 👃 
+It smells like `Open-closed Principle` Yeah?! 👃 
 
 You want to keep the responsibilities seperate. In this case `caching` should not be in a repository or controller but in it's own class. 
 
-It smells like `Single Responsibility Principle` yeah ?! 👃 
+It smells like `Single Responsibility Principle` yeah?! 👃 
 
 ```php
 
 class UserRepository
 {
-    function find($uid) {
+    function find($uid)
+    {
         return User::find($uid);
     }
 }
 
 class MadUsersController extends Controller
 {
-    function show ($madUserId) {
+    function show ($madUserId)
+    {
         $madUser = app()->call('UserRepository@find', ['id' => $madUserId]);
     }
 }
@@ -101,10 +98,11 @@ With the help of laravel-decorator built-in cache decorator, you can go to `AppS
 
 use Imanghafoori\Decorator\Decorators\DecoratorFactory;
 
-class AppServiceProvider extends ServiceProvider {
+class AppServiceProvider extends ServiceProvider
+{
 
-    public function boot( ) {
-
+    public function boot()
+    {
         $keyMaker = function ($madId) {
             return 'mad_user_key_' . $madId;
         };
@@ -117,8 +115,8 @@ class AppServiceProvider extends ServiceProvider {
 
 ```
 
-You will get cached results from your calls, in your `UserController` without touching it !
-but rememnber to change :
+You will get cached results from your calls, in your `UserController` without touching it!
+but rememnber to change:
 
 ```php
  app()->call('UserRepository@find', ...
@@ -130,10 +128,11 @@ but rememnber to change :
 
 ```php
 
-public function boot () {
+public function boot ()
+{
     \Decorator::define('myDecoratorName1', 'SomeClass@someMethod');
     
-// or
+    // or
 
     \Decorator::define('myDecoratorName2', function ($callable) {
         return function (...) use ($callable){ ... } 
@@ -144,7 +143,7 @@ public function boot () {
 Then you can use this name (`myDecoratorName`) to decorate methods.
 
 
-### How to decorate a method ?
+#### How to decorate a method?
 
 ```php
 
@@ -157,16 +156,16 @@ Then you can use this name (`myDecoratorName`) to decorate methods.
 ```
 
 
-### How to call a method with it's decorators ?
+### How to call a method with it's decorators?
 
 ![image](https://user-images.githubusercontent.com/6961695/51078628-970f9b80-16cd-11e9-8b23-267b2d1564e7.png)
 
 
-## Decorate Facades :
+### Decorate Facades:
 
-### Decorating Facade Methods
+#### Decorating Facade Methods
 
-First, you should extend the `Imanghafoori\Decorator\DecoratableFacade` class (instead of the laravel base Facade).
+First you should extend the `Imanghafoori\Decorator\DecoratableFacade` class (instead of the laravel base Facade).
 
 ![image](https://user-images.githubusercontent.com/6961695/51075625-484d0c00-16a3-11e9-9551-73b199a9c5e9.png)
 
@@ -176,13 +175,13 @@ First, you should extend the `Imanghafoori\Decorator\DecoratableFacade` class (i
 ![image](https://user-images.githubusercontent.com/6961695/51078788-6715c780-16d0-11e9-91af-710fc9cd51b7.png)
 
 
-then if you call your facade as normal you get decorated results.
+Then if you call your facade as normal you get decorated results.
 
 
 ![image](https://user-images.githubusercontent.com/6961695/51075751-3d937680-16a5-11e9-855b-2b8b61bdb876.png)
 
 
-### :warning: Warning :
+#### :warning: Warning:
 
 With great power, comes great responsibilities.
 
@@ -199,7 +198,7 @@ But if you return only `int` and your decorator causes the `null` value to be fi
 
 ### :star: Your Stars Make Us Do More :star:
 
-As always if you found this package useful and you want to encourage us to maintain and work on it, Please `press the star button` to declare your willing.
+As always if you found this package useful and you want to encourage us to maintain and work on it, Please `press the star button` to declare your willingness.
 
 
 ### More packages from the author:
@@ -222,25 +221,9 @@ As always if you found this package useful and you want to encourage us to maint
 
 ------------
 
-:gem: Authorization and ACL is now very easy with hey-man package !!!
+:gem: Authorization and ACL is now very easy with hey-man package!
 
 - https://github.com/imanghafoori1/laravel-heyman
 
-----------------
-
-### 🍌 Reward me a banana 🍌
-
-so that I will have energy to start the next package for you.
-
-
-- Dodge Coin: DJEZr6GJ4Vx37LGF3zSng711AFZzmJTouN
-
-- LiteCoin: ltc1q82gnjkend684c5hvprg95fnja0ktjdfrhcu4c4
-
-- BitCoin: bc1q53dys3jkv0h4vhl88yqhqzyujvk35x8wad7uf9
-
-- Ripple: rJwrb2v1TR6rAHRWwcYvNZxjDN2bYpYXhZ
-
-- Etherium: 0xa4898246820bbC8f677A97C2B73e6DBB9510151e
 
 --------------
