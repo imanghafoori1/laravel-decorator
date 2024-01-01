@@ -6,6 +6,7 @@
 <a href="https://scrutinizer-ci.com/g/imanghafoori1/laravel-decorator"><img src="https://img.shields.io/scrutinizer/g/imanghafoori1/laravel-decorator.svg?style=round-square" alt="Quality Score"></img></a>
 [![StyleCI](https://github.styleci.io/repos/164699371/shield?branch=master)](https://github.styleci.io/repos/164699371)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=round-square)](LICENSE.md)
+[![Check Imports](https://github.com/imanghafoori1/laravel-decorator/actions/workflows/check_imports.yml/badge.svg?branch=master)](https://github.com/imanghafoori1/laravel-decorator/actions/workflows/check_imports.yml)
 [![Latest Stable Version](https://poser.pugx.org/imanghafoori/laravel-decorator/v/stable)](https://packagist.org/packages/imanghafoori/laravel-decorator)
 [![Code Coverage](https://scrutinizer-ci.com/g/imanghafoori1/laravel-decorator/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/imanghafoori1/laravel-decorator/?branch=master)
 [![Total Downloads](https://poser.pugx.org/imanghafoori/laravel-decorator/downloads)](https://packagist.org/packages/imanghafoori/laravel-decorator)
