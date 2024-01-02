@@ -16,7 +16,9 @@
     },
     "require-dev": {
         "orchestra/testbench": "~6.0",
-        "squizlabs/php_codesniffer": "3.*"
+        "squizlabs/php_codesniffer": "3.*",
+        "imanghafoori/php-imports-analyzer": "^1.0.6"
+
     },
     "autoload": {
         "psr-4": {

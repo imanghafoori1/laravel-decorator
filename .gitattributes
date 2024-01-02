@@ -1,5 +1,6 @@
 * text=auto
 /.gitattributes     export-ignore
+/.github            export-ignore
 /.gitignore         export-ignore
 /.styleci.yml       export-ignore
 /phpunit.xml.dist   export-ignore
