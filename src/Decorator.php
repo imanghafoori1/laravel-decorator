@@ -23,9 +23,8 @@ class Decorator
     /**
      * Defines a new decorator with name.
      *
-     * @param string   $name
-     * @param callable $callback
-     *
+     * @param  string  $name
+     * @param  callable  $callback
      * @return void
      */
     public function define($name, $callback)
@@ -34,8 +33,7 @@ class Decorator
     }
 
     /**
-     * @param $name
-     *
+     * @param  $name
      * @return mixed|null
      */
     public function getGlobalDecorator($name)
@@ -51,9 +49,8 @@ class Decorator
     /**
      * Decorates a callable with a defined decorator name.
      *
-     * @param string $callback
-     * @param mixed  $decorator
-     *
+     * @param  string  $callback
+     * @param  mixed  $decorator
      * @return void
      */
     public function decorate($callback, $decorator)
@@ -64,10 +61,9 @@ class Decorator
     /**
      * Calls a class@method with it's specified decorators.
      *
-     * @param string      $callback
-     * @param array       $parameters
-     * @param string|null $defaultMethod
-     *
+     * @param  string  $callback
+     * @param  array  $parameters
+     * @param  string|null  $defaultMethod
      * @return mixed
      */
     public function call($callback, array $parameters = [], $defaultMethod = null)
@@ -100,15 +96,14 @@ class Decorator
     }
 
     /**
-     * @param $callable
-     * @param $decorators
-     *
+     * @param  $callable
+     * @param  $decorators
      * @return mixed
      */
     public function decorateWith($callable, array $decorators)
     {
         foreach ($decorators as $decorator) {
-            if (is_string($decorator) and !Str::contains($decorator, '@')) {
+            if (is_string($decorator) and ! Str::contains($decorator, '@')) {
                 $decorator = $this->globalDecorators[$decorator];
             }
 
@@ -123,10 +118,9 @@ class Decorator
     }
 
     /**
-     * @param $callable
-     * @param $decorators
-     * @param $params
-     *
+     * @param  $callable
+     * @param  $decorators
+     * @param  $params
      * @return mixed
      */
     public function callOnlyWith($callable, $decorators, $params)
@@ -139,12 +133,11 @@ class Decorator
     /**
      * get App::Call Callable Parameters.
      *
-     * @param $callable
-     * @param array $params
+     * @param  $callable
+     * @param  array  $params
+     * @return array
      *
      * @throws \ReflectionException
-     *
-     * @return array
      */
     public function getCallParams($callable, array $params): array
     {
@@ -155,7 +148,7 @@ class Decorator
             $argName = get_method_argNames($class[0], $class[1]);
         }
         $parameters = array_map(function ($MArgName, $Parameters) use ($argName) {
-            return [$MArgName ?? $argName[count($argName) - 1]=>$Parameters];
+            return [$MArgName ?? $argName[count($argName) - 1] => $Parameters];
         }, $argName, $params);
 
         count($parameters) == 1
