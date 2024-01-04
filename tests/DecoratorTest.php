@@ -165,8 +165,7 @@ class DecoratorTest extends TestCase
     }
 
     /**
-     * @param int $max
-     *
+     * @param  int  $max
      * @return \Closure
      */
     private function maxResult(int $max): \Closure
@@ -245,7 +244,7 @@ class ResultCasterDecorator
     public function _toString($callable)
     {
         return function (...$params) use ($callable) {
-            return (string) app()->call($callable, ['x'=>$params[0][0], 'y'=>$params[0][1]]);
+            return (string) app()->call($callable, ['x' => $params[0][0], 'y' => $params[0][1]]);
         };
     }
 }

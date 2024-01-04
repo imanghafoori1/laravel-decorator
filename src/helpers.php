@@ -1,11 +1,11 @@
 <?php
 
-if (!function_exists('callWithDecorators')) {
+if (! function_exists('callWithDecorators')) {
     function callWithDecorators($callback, $parameters)
     {
     }
 }
-if (!function_exists('get_func_argNames')) {
+if (! function_exists('get_func_argNames')) {
     /**
      * @throws ReflectionException
      */
@@ -21,7 +21,7 @@ if (!function_exists('get_func_argNames')) {
     }
 }
 
-if (!function_exists('get_method_argNames')) {
+if (! function_exists('get_method_argNames')) {
     /**
      * @throws ReflectionException
      */

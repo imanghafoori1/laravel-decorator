@@ -26,10 +26,9 @@ class DecoratorFactory
     }
 
     /**
-     * @param $key
-     * @param $minutes
-     * @param $remember
-     *
+     * @param  $key
+     * @param  $minutes
+     * @param  $remember
      * @return \Closure
      */
     private static function getDecoratorFactory($key, $remember, $minutes = null): \Closure
@@ -45,7 +44,7 @@ class DecoratorFactory
                 }
 
                 return cache()->$remember(...array_filter([$key, $minutes, $cb], function ($el) {
-                    return !is_null($el);
+                    return ! is_null($el);
                 }));
             };
         };
