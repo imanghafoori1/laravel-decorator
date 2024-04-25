@@ -30,7 +30,7 @@ composer require imanghafoori/laravel-decorator
 
 A decorator is callable which wraps around the original decorated callable, in order to form a new callable composed of the previous two.
 
-Like a python snake swallowing a deer whole and wraps around it's body !
+Like a python snake swallowing a deer whole and wraps around its body !
 
 After that the snake becomes capable to eat and digest grasses :herb: because it has a deer inside it.
 
@@ -38,7 +38,7 @@ Technically, A `"Decorator"`:
 
 1- Is a "callable"
 
-2- which takes an other "callable" (as it's only argument, like a snake swallows an other snake)
+2- which takes another "callable" (as it's only argument, like a snake swallows another snake)
 
 3- and returns a new `"callable"` (which internally calls the original `callable`, putting some code before and after it.)
 
@@ -62,11 +62,11 @@ Then after a while you decide to put a cache layer between those two classes for
 According to SOLID principles, you shouldn't put the caching code logic neither in your controller nor your UserRepo.
 But somewhere in between.
 
-In other words, you want to add a new feature (caching in this case) without modifing the existing code.
+In other words, you want to add a new feature (caching in this case) without modifying the existing code.
 
 It smells like `Open-closed Principle` Yeah?! 👃 
 
-You want to keep the responsibilities seperate. In this case `caching` should not be in a repository or controller but in it's own class. 
+You want to keep the responsibilities separate. In this case `caching` should not be in a repository or controller but in its own class. 
 
 It smells like `Single Responsibility Principle` yeah?! 👃 
 
@@ -91,7 +91,7 @@ class MadUsersController extends Controller
 ```
 ok now there is no cache, going on. it is a direct call.
 
-With the help of laravel-decorator built-in cache decorator, you can go to `AppServiceProvider.php` or any other service provider 
+With the help of laravel-decorator built-in cache decorator, you can go to `AppServiceProvider.php` (or any other service provider):
 
 ```php
 <?php
@@ -116,7 +116,7 @@ class AppServiceProvider extends ServiceProvider
 ```
 
 You will get cached results from your calls, in your `UserController` without touching it!
-but rememnber to change:
+but remember to change:
 
 ```php
  app()->call('UserRepository@find', ...
@@ -150,13 +150,13 @@ Then you can use this name (`myDecoratorName`) to decorate methods.
 // You may set multiple decorators on a single method... 
 \Decorator::decorate('class@method, 'someClass@someOtherDecorator'); // (first)
 
-// or reference the decorator by it's name :
+// or reference the decorator by its name :
 \Decorator::decorate('class@method, 'myDecoratorName'); // (second)
 
 ```
 
 
-### How to call a method with it's decorators?
+### How to call a method with its decorators?
 
 ![image](https://user-images.githubusercontent.com/6961695/51078628-970f9b80-16cd-11e9-8b23-267b2d1564e7.png)
 
@@ -198,7 +198,7 @@ But if you return only `int` and your decorator causes the `null` value to be fi
 
 ### :star: Your Stars Make Us Do More :star:
 
-As always if you found this package useful and you want to encourage us to maintain and work on it, Please `press the star button` to declare your willingness.
+As always if you found this package useful, and you want to encourage us to maintain and work on it, Please `press the star button` to declare your willingness.
 
 
 ### More packages from the author:
@@ -215,7 +215,7 @@ As always if you found this package useful and you want to encourage us to maint
 
 ------------
 
-:gem: It allows you login with any password in local environment only.
+:gem: It allows you log in with any password in local environment only.
 
 - https://github.com/imanghafoori1/laravel-anypass
 
