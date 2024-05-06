@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Container\Container;
-use Illuminate\Support\Facades\App;
 use Imanghafoori\Decorator\Decorators\DecoratorFactory;
 
 class CacheResultDecoratorTest extends TestCase
@@ -25,7 +24,6 @@ class CacheResultDecoratorTest extends TestCase
 
     public function testPermanentCacheResultDecorator()
     {
-
         Container::getInstance()->singleton('abc', cachee::class);
         \MyFacade::forgetDecorations('getGiven');
         \MyFacade::decorateMethod('getGiven', DecoratorFactory::foreverCache(
