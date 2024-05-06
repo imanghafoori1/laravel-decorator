@@ -2,19 +2,21 @@
 
 namespace Imanghafoori\Decorator;
 
-use Illuminate\Support\Str;
+use Illuminate\Container\Container;
+use ReflectionFunction;
+use ReflectionMethod;
 
 class Decorator
 {
     /**
-     * All of the decorators for method calls.
+     * All the decorators for method calls.
      *
      * @var array
      */
     protected $globalDecorators = [];
 
     /**
-     * All of the decorator names and definitions.
+     * All the decorator names and definitions.
      *
      * @var array
      */
@@ -76,7 +78,7 @@ class Decorator
         $callback = $this->decorateWith($callback, $decorators);
         $parameters = $this->getCallParams($callback, $parameters);
 
-        return app()->call($callback, $parameters, $defaultMethod);
+        return Container::getInstance()->call($callback, $parameters, $defaultMethod);
     }
 
     public function unDecorate($decorated, $decorator = null)
@@ -97,13 +99,14 @@ class Decorator
 
     /**
      * @param  $callable
-     * @param  $decorators
+     * @param  array  $decorators
      * @return mixed
+     * @throws \ReflectionException
      */
     public function decorateWith($callable, array $decorators)
     {
         foreach ($decorators as $decorator) {
-            if (is_string($decorator) and ! Str::contains($decorator, '@')) {
+            if (is_string($decorator) and ! self::contains($decorator, '@')) {
                 $decorator = $this->globalDecorators[$decorator];
             }
 
@@ -111,7 +114,7 @@ class Decorator
                 ? $params = $this->getCallParams($this->normalizeMethod($decorator), [$callable])
                 : $params = $this->getCallParams($decorator, [$callable]);
 
-            $callable = app()->call($decorator, $params);
+            $callable = Container::getInstance()->call($decorator, $params);
         }
 
         return $callable;
@@ -127,7 +130,7 @@ class Decorator
     {
         $callable = $this->decorateWith($callable, $decorators);
 
-        return \App::make($callable, $params);
+        return Container::getInstance()->make($callable, $params);
     }
 
     /**
@@ -142,10 +145,10 @@ class Decorator
     public function getCallParams($callable, array $params): array
     {
         if (is_callable($callable)) {
-            $argName = get_func_argNames($callable);
+            $argName = $this->getFunctionArgNames($callable);
         } else {
             $class = explode('@', $callable);
-            $argName = get_method_argNames($class[0], $class[1]);
+            $argName = $this->getMethodArgNames($class[0], $class[1]);
         }
         $parameters = array_map(function ($MArgName, $Parameters) use ($argName) {
             return [$MArgName ?? $argName[count($argName) - 1] => $Parameters];
@@ -156,5 +159,35 @@ class Decorator
             : $parameters = array_merge_recursive($parameters[0], $parameters[1]);
 
         return $parameters;
+    }
+
+    /**
+     * @throws \ReflectionException
+     * @throws \ReflectionException
+     */
+    private function getMethodArgNames($className, $methodName)
+    {
+        return $this->getParameterNames(new ReflectionMethod($className, $methodName));
+    }
+
+    /**
+     * @throws \ReflectionException
+     */
+    private function getFunctionArgNames($funcName)
+    {
+        return $this->getParameterNames(new ReflectionFunction($funcName));
+    }
+
+    private static function contains($haystack, $needle)
+    {
+        return mb_strpos($haystack, $needle) !== false;
+
+    }
+
+    private function getParameterNames($reflection): array
+    {
+        return array_map(function ($param) {
+            return $param->name;
+        }, $reflection->getParameters());
     }
 }

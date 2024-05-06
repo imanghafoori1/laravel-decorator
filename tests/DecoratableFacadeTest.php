@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Container\Container;
 use Imanghafoori\Decorator\Decorator;
 use Imanghafoori\Decorator\IamDecoratable;
 
@@ -7,7 +8,7 @@ class DecoratableFacadeTest extends TestCase
 {
     public function testDecoratableFacade()
     {
-        app()->singleton('abc', abc::class);
+        Container::getInstance()->singleton('abc', abc::class);
         \MyFacade::forgetDecorations('getGiven');
         \MyFacade::decorateMethod('getGiven', function ($f) {
             return function () {
@@ -29,8 +30,8 @@ class DecoratableFacadeTest extends TestCase
 
     public function testDecoratableFacade2()
     {
-        app()->singleton('abc', abc::class);
-        app(Decorator::class)->define('stringifyResult', [ResultCasterDecorator::class, 'toStringStaticDecorator']);
+        Container::getInstance()->singleton('abc', abc::class);
+        Container::getInstance()->make(Decorator::class)->define('stringifyResult', [ResultCasterDecorator::class, 'toStringStaticDecorator']);
 
         \MyFacade::forgetDecorations();
         \MyFacade::decorateMethod('getGiven', 'stringifyResult');
@@ -42,7 +43,7 @@ class DecoratableFacadeTest extends TestCase
 
     public function testStaticMethodsAsDecoratorsOnFacades()
     {
-        app()->singleton('abc', abc::class);
+        Container::getInstance()->singleton('abc', abc::class);
         \MyFacade::decorateMethod('getGiven', ResultCasterDecorator::class.'@toStringDecorator');
 
         $this->assertIsString(\MyFacade::getGiven(1));
@@ -52,7 +53,7 @@ class DecoratableFacadeTest extends TestCase
 
     public function testFacadeClassDecorators()
     {
-        app()->singleton('abc', abc::class);
+        Container::getInstance()->singleton('abc', abc::class);
         \MyFacade::decorateAll(ResultCasterDecorator::class.'@minimumParamZero');
         \MyFacade::decorateAll(ResultCasterDecorator::class.'@toStringDecorator');
 
@@ -65,7 +66,7 @@ class DecoratableFacadeTest extends TestCase
 
     public function testFacadeClassDecoratorsCombination()
     {
-        app()->singleton('abc', abc::class);
+        Container::getInstance()->singleton('abc', abc::class);
         \MyFacade::decorateMethod('getGiven', ResultCasterDecorator::class.'@minimumParamZero');
         \MyFacade::decorateAll(ResultCasterDecorator::class.'@toStringDecorator');
 
