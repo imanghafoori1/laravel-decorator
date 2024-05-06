@@ -11,14 +11,14 @@ class Decorator
     /**
      * All the decorators for method calls.
      *
-     * @var array
+     * @var array<string, array>
      */
     protected $globalDecorators = [];
 
     /**
      * All the decorator names and definitions.
      *
-     * @var array
+     * @var array<string, array>
      */
     protected $decorations = [];
 
@@ -107,7 +107,7 @@ class Decorator
     public function decorateWith($callable, array $decorators)
     {
         foreach ($decorators as $decorator) {
-            if (is_string($decorator) and ! self::contains($decorator, '@')) {
+            if (is_string($decorator) && ! self::contains($decorator, '@')) {
                 $decorator = $this->globalDecorators[$decorator];
             }
 
@@ -143,7 +143,7 @@ class Decorator
      *
      * @throws \ReflectionException
      */
-    public function getCallParams($callable, array $params): array
+    public function getCallParams($callable, array $params)
     {
         if (is_callable($callable)) {
             $argName = $this->getFunctionArgNames($callable);
@@ -184,7 +184,7 @@ class Decorator
         return mb_strpos($haystack, $needle) !== false;
     }
 
-    private function getParameterNames($reflection): array
+    private function getParameterNames($reflection)
     {
         return array_map(fn ($param) => $param->name, $reflection->getParameters());
     }

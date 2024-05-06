@@ -9,7 +9,7 @@ trait IamDecoratable
     /**
      * The decorators for resolved object instances of the facade.
      *
-     * @var array
+     * @var array<string, array>
      */
     protected static $decorations = [];
 
@@ -60,9 +60,7 @@ trait IamDecoratable
      */
     public static function __callStatic($method, $args)
     {
-        $callback = function (...$args) use ($method) {
-            return parent::__callStatic($method, $args);
-        };
+        $callback = fn (...$args) => parent::__callStatic($method, $args);
 
         $decorators = self::getDecorations($method) + static::$classDecorations;
         $callback = Container::getInstance()->make(Decorator::class)->decorateWith($callback, $decorators);
