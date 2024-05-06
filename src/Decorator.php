@@ -101,6 +101,7 @@ class Decorator
      * @param  $callable
      * @param  array  $decorators
      * @return mixed
+     *
      * @throws \ReflectionException
      */
     public function decorateWith($callable, array $decorators)
@@ -181,7 +182,6 @@ class Decorator
     private static function contains($haystack, $needle)
     {
         return mb_strpos($haystack, $needle) !== false;
-
     }
 
     private function getParameterNames($reflection): array
