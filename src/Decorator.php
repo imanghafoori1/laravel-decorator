@@ -186,8 +186,6 @@ class Decorator
 
     private function getParameterNames($reflection): array
     {
-        return array_map(function ($param) {
-            return $param->name;
-        }, $reflection->getParameters());
+        return array_map(fn ($param) => $param->name, $reflection->getParameters());
     }
 }

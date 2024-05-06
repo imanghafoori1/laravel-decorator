@@ -2,6 +2,9 @@
 
 namespace Imanghafoori\Decorator\Decorators;
 
+use Closure;
+use Illuminate\Container\Container;
+
 class DecoratorFactory
 {
     public static function cache($key, $minutes = 1)
@@ -20,7 +23,7 @@ class DecoratorFactory
             return function (...$param) use ($callable) {
                 $param = is_array($param[0]) ? $param[0] : $param;
 
-                return app()->call($callable, $param);
+                return Container::getInstance()->call($callable, $param);
             };
         };
     }
@@ -31,21 +34,17 @@ class DecoratorFactory
      * @param  $remember
      * @return \Closure
      */
-    private static function getDecoratorFactory($key, $remember, $minutes = null): \Closure
+    private static function getDecoratorFactory($key, $remember, $minutes = null): Closure
     {
         return function ($callable) use ($key, $minutes, $remember) {
             return function (...$params) use ($callable, $key, $minutes, $remember) {
-                $cb = function () use ($callable, $params) {
-                    return \App::call($callable, $params);
-                };
+                $cb = fn () => Container::getInstance()->call($callable, $params);
 
                 if (is_callable($key)) {
                     $key = $key(...$params);
                 }
 
-                return cache()->$remember(...array_filter([$key, $minutes, $cb], function ($el) {
-                    return ! is_null($el);
-                }));
+                return Container::getInstance()->make('cache')->$remember(...array_filter([$key, $minutes, $cb], fn ($el) => ! is_null($el)));
             };
         };
     }

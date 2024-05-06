@@ -2,6 +2,8 @@
 
 namespace Imanghafoori\Decorator;
 
+use Illuminate\Container\Container;
+
 trait IamDecoratable
 {
     /**
@@ -63,7 +65,7 @@ trait IamDecoratable
         };
 
         $decorators = self::getDecorations($method) + static::$classDecorations;
-        $callback = app(Decorator::class)->decorateWith($callback, $decorators);
+        $callback = Container::getInstance()->make(Decorator::class)->decorateWith($callback, $decorators);
 
         return $callback(...$args);
     }
