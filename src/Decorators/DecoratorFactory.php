@@ -19,12 +19,8 @@ class DecoratorFactory
 
     public static function variadicParam()
     {
-        return function ($callable) {
-            return function (...$param) use ($callable) {
-                $param = is_array($param[0]) ? $param[0] : $param;
-
-                return Container::getInstance()->call($callable, $param);
-            };
+        return fn ($callable) => function (...$param) use ($callable) {
+            return Container::getInstance()->call($callable, is_array($param[0]) ? $param[0] : $param);
         };
     }
 
@@ -36,16 +32,19 @@ class DecoratorFactory
      */
     private static function getDecoratorFactory($key, $remember, $minutes = null): Closure
     {
-        return function ($callable) use ($key, $minutes, $remember) {
-            return function (...$params) use ($callable, $key, $minutes, $remember) {
-                $cb = fn () => Container::getInstance()->call($callable, $params);
+        return fn ($callable) => fn (...$params) => DecoratorFactory::call($callable, $params, $key, $minutes, $remember);
+    }
 
-                if (is_callable($key)) {
-                    $key = $key(...$params);
-                }
+    private static function call($callable, array $params, $key, $minutes, $remember)
+    {
+        $caller = fn () => Container::getInstance()->call($callable, $params);
 
-                return Container::getInstance()->make('cache')->$remember(...array_filter([$key, $minutes, $cb], fn ($el) => ! is_null($el)));
-            };
-        };
+        if (is_callable($key)) {
+            $key = $key(...$params);
+        }
+
+        $args = array_filter([$key, $minutes, $caller], fn ($value) => ! is_null($value));
+
+        return Container::getInstance()->make('cache')->$remember(...$args);
     }
 }
